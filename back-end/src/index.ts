@@ -1,3 +1,4 @@
 import { app } from "./controller/app";
+import { questionRouter } from "./router/questionRouter";
 
-console.log("hello world")
+app.use("/question", questionRouter);
