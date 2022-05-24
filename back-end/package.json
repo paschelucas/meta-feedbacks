@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
-    "migrations": "tsnd ./src/data/migrations.ts",
+    "migrations": "tsnd ./src/data/Migrations.ts",
     "build": "tsc",
-    "start": "tsc && node ./build/index.js",
+    "start": "tsc && node ./build/src/index.js",
     "test": "jest"
   },
   "keywords": [],
