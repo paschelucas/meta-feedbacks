@@ -17,3 +17,4 @@ const userBusiness = new UserBusiness(
 const userController = new UserController(userBusiness);
 
 userRouter.post("/signup", userController.signUp)
+userRouter.post("/login", userController.login)

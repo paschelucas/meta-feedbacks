@@ -76,16 +76,37 @@ export default class UserBusiness {
         throw new CustomError(422, "Favor informar email e senha.");
       }
 
+      const validEmailVerifier: RegExp =
+        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+
+      const isEmailValid = validEmailVerifier.test(email);
+
+      if (!isEmailValid) {
+        throw new CustomError(422, "Formato de email inválido.");
+      }
+
+      const validPasswordVerifier: RegExp =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{9,}$/;
+      const isPasswordValid = validPasswordVerifier.test(password);
+
+      if (!isPasswordValid) {
+        throw new CustomError(
+          422,
+          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
+        );
+      }
+
       const registeredUser = await this.userDatabase.findByEmail(email);
       if (!registeredUser) {
         throw new CustomError(404, "Este usuário não está cadastrado.");
       }
       const passwordIsCorrect = await this.hashManager.compare(
         password,
-        registeredUser.password
+        registeredUser.user_password
       );
+
       if (!passwordIsCorrect) {
-        throw new CustomError(401, "Email ou senha incorretos.");
+        throw new CustomError(403, "Email ou senha incorretos.");
       }
 
       const token = this.authenticator.generate({

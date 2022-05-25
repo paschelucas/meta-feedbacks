@@ -15,12 +15,12 @@ export default class UserDatabase extends BaseDatabase {
 
   findByEmail = async (email: string) => {
     try {
-      const queryResult: FindByEmailResponse = await this.connection(
+      const [queryResult] = await this.connection(
         this.TABLE_NAME
       )
         .select("*")
         .where({ user_email: email });
-      return queryResult[0];
+      return queryResult;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
