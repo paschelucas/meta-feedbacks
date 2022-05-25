@@ -1,7 +1,7 @@
 import GlobalContext from "./GlobalContext";
 import useRequest from '../hooks/useRequest.js';
 import tokenMock from "../mocks/tokenMock";
-import { goToHome } from "../routes/coordinator";
+import { goToHome, goToLogin } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 
 const GlobalState = (props) => {
@@ -23,7 +23,19 @@ const GlobalState = (props) => {
             }
 
             goToHome(navigate)
-    }; 
+    };
+    
+    const signup = (data) => {
+        const token = tokenMock;
+
+        if(token) {
+            localStorage.setItem("token",token);
+        }
+        else {
+            alert("😭");
+        }
+        goToLogin(navigate)
+    };
 
     const value = {login, isLoading};
 
