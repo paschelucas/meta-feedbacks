@@ -3,40 +3,39 @@ import User from "../model/User";
 import { FindByEmailResponse } from "../types/findByEmailResponse";
 
 export default class UserDatabase extends BaseDatabase {
-    protected TABLE_NAME = "users"
+  protected TABLE_NAME = "users";
 
-    insert = async(user: User) => {
-        try {
-            await this
-            .connection(this.TABLE_NAME)
-            .insert(user)
-
-        } catch (error) {
-            throw new Error("Erro do banco.")
-        }
+  insert = async (user: User): Promise<void> => {
+    try {
+      await this.connection(this.TABLE_NAME).insert(user);
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
     }
+  };
 
-    findByEmail = async(email: string) => {
-        try {
-            const queryResult: FindByEmailResponse = await this
-            .connection(this.TABLE_NAME)
-            .select("*")
-            .where({user_email: email})
-            return queryResult[0]
-        } catch (error) {
-            throw new Error("Erro ao buscar usuário no banco.")
-        }
+  findByEmail = async (email: string) => {
+    try {
+      const [queryResult] = await this.connection(
+        this.TABLE_NAME
+      )
+        .select("*")
+        .where({ user_email: email });
+      return queryResult;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
     }
+  };
 
-    findById = async(id: string) => {
-        try {
-            const queryResult: FindByEmailResponse = await this
-            .connection(this.TABLE_NAME)
-            .select("*")
-            .where({id})
-            return queryResult[0]
-        } catch (error) {
-            throw new Error("Erro ao buscar usuário no banco.")
-        }
+  findById = async (id: string) => {
+    try {
+      const queryResult: FindByEmailResponse = await this.connection(
+        this.TABLE_NAME
+      )
+        .select("*")
+        .where({ id });
+      return queryResult[0];
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
     }
+  };
 }
