@@ -7,3 +7,58 @@ Content-Type: application/json
     "password": "Teste1234",
     "role": "mentor"
 }
+
+###
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Teste2",
+    "email": "teste2@lab.com",
+    "password": "Teste21234",
+    "role": "admin"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "teste2@lab.com",
+    "password": "Teste21234"
+}
+
+###
+
+POST http://localhost:3003/leaguers/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMTA1MiwiZXhwIjoxNjUzNTIyODUyfQ.tU0ZQDN_RUR3kBfiG2u0srlmiwCyBlbwKW_vXAYuHZY
+
+{
+    "name": "Teste",
+    "turma": "turma-piloto",
+    "fase": "introducao"
+}
+
+###
+
+POST http://localhost:3003/leaguers/create
+Content-Type: application/json
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMzU3NCwiZXhwIjoxNjUzNTI1Mzc0fQ.4mToMmXO5Jt0PsozicjjD7GjBWz7-_lrwPY_ZJoQvGo
+
+{
+    "name": "Teste2",
+    "turma": "turma-1",
+    "fase": "labs"
+}
+
+###
+
+GET http://localhost:3003/leaguers/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMzU3NCwiZXhwIjoxNjUzNTI1Mzc0fQ.4mToMmXO5Jt0PsozicjjD7GjBWz7-_lrwPY_ZJoQvGo
+
+###
+
