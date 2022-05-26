@@ -16,7 +16,7 @@ const LoginPage = () => {
     <ContainerLogin>
       <ImgLogo src={logo}/>
       <H3><strong>Bem vindo!</strong></H3>
-      <Span>Faça o seu login</Span>
+      <Span>Faça o seu login.</Span>
       <form onSubmit={handleSubmit(login)}>
         <Input {...register("name", {required: "Precisa ter um nome"})} type="text" placeholder="digite seu login"/>
         {errors ? <p>{errors.name?.message}</p> : <></>}

@@ -139,14 +139,18 @@ export const Button = styled.button`
     border-radius:3px;
     color:#ffff;
     background-color:#122870;
+    transition: 0.3s;
     border-radius:3px;
     border:transparent;
     padding: 8px;
 
+
 :hover{
     color:#ffff;
-    font-weight: bold;
+    font-weight:bold;
+    background-color:#19348c;
     cursor: pointer;
+
 }
 
 @media screen and (min-width : 320px) and
