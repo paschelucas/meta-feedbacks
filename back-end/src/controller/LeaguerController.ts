@@ -13,6 +13,7 @@ export default class LeaguerController {
       name,
       turma,
       fase,
+      responsavel
     };
 
     try {
@@ -34,6 +35,21 @@ export default class LeaguerController {
       res
       .status(200)
       .send(allLeaguers)
+
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  }
+
+  public getLeaguersByUserId = async (req:Request, res: Response) => {
+    const token = req.headers.authorization as string
+
+    try {
+      const leaguers = await this.leaguerBusiness.getLeaguerByUserId(token);
+      res
+      .status(200)
+      .send(leaguers)
 
     } catch (error: any) {
       const { statusCode, message } = error;

@@ -4,6 +4,7 @@ import { IdGenerator } from "../services/generateId";
 import { LeaguerInputDTO } from "../types/DTO/LeaguerInputDTO";
 import { CustomError } from "../error/CustomError";
 import Leaguer from "../model/Leaguer";
+import UserDatabase from "../data/UserDatabase";
 
 
 export default class LeaguerBusiness {
@@ -11,15 +12,16 @@ export default class LeaguerBusiness {
     constructor(
         private leaguerDatabase: LeaguerDatabase,
         private idGenerator: IdGenerator,
-        private authenticator: Authenticator
+        private authenticator: Authenticator,
+        private userDatabase: UserDatabase
     ){}
 
     createLeaguer = async (input: LeaguerInputDTO, token: string): Promise<Leaguer> => {
         try {
 
-        const { name, turma, fase } = input;
+        const { name, turma, fase, responsavel } = input;
 
-          if (!name || !turma || !fase) {
+          if (!name || !turma || !fase || !responsavel) {
               throw new CustomError(422, "Favor preencher todos os campos.");
             }
             
@@ -33,7 +35,7 @@ export default class LeaguerBusiness {
                throw new Error("usuário não autorizado")
             }
 
-        const userId = tokenData.id
+        const user = await this.userDatabase.getUserByName(responsavel)
     
         const id = this.idGenerator.generateId()
     
@@ -42,7 +44,7 @@ export default class LeaguerBusiness {
           name,
           Leaguer.stringToTurmaRole(turma),
           Leaguer.stringToFaseRole(fase),
-          userId
+          user.user_id
         );
           
         await this.leaguerDatabase.insert(newLeaguer);
@@ -63,7 +65,16 @@ export default class LeaguerBusiness {
             }
   
             if(tokenData.role!=="admin" && tokenData.role!=="mentor"){
-               throw new Error("usuário não autorizado")
+                try {
+                    const userId = tokenData.id
+        
+                    const leaguers = await this.leaguerDatabase.findByUserId(userId);
+        
+                    return leaguers;
+                    
+                } catch (error: any) {
+                    throw new CustomError(error.statusCode, error.message);
+                }
             }
 
             const allLeaguers = await this.leaguerDatabase.getAllLeaguers();
@@ -73,5 +84,25 @@ export default class LeaguerBusiness {
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
-    }
+    };
+
+    getLeaguerByUserId = async (token:string) => {
+        
+        try {
+            const tokenData = this.authenticator.getTokenData(token)
+  
+            if(!tokenData){
+               throw new Error("Token inválido ou não passado")
+            }
+
+            const userId = tokenData.id
+
+            const leaguers = await this.leaguerDatabase.findByUserId(userId);
+
+            return leaguers;
+            
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
 }

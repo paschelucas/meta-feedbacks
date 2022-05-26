@@ -35,4 +35,18 @@ export default class UserDatabase extends BaseDatabase {
       throw new Error(error.sqlMessage || error.message);
     }
   };
+
+  getUserByName = async (name: string) => {
+    try {
+      const queryResult: FindByEmailResponse = await this.connection(
+        this.TABLE_NAME
+      )
+        .select("*")
+        .where({ user_name: name });
+      return queryResult[0];
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+  
 }
