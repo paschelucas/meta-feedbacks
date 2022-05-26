@@ -15,9 +15,7 @@ export default class UserDatabase extends BaseDatabase {
 
   findByEmail = async (email: string) => {
     try {
-      const [queryResult] = await this.connection(
-        this.TABLE_NAME
-      )
+      const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
         .where({ user_email: email });
       return queryResult;
@@ -26,14 +24,13 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  findById = async (id: string) => {
+  findById = async (id: string): Promise<User | undefined> => {
     try {
-      const queryResult: FindByEmailResponse = await this.connection(
-        this.TABLE_NAME
-      )
+      const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
-        .where({ id });
-      return queryResult[0];
+        .where("user_id", id);
+      console.log(queryResult)
+      return queryResult;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
