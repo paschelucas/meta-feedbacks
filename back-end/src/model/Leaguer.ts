@@ -28,6 +28,34 @@ export default class Leaguer {
     getLeaguerResponsavel(){
         return this.leaguer_responsavel
     }
+
+    static stringToTurmaRole(input: string): TurmaRole{
+        switch (input) {
+            case 'turma-piloto':
+              return TurmaRole.PILOTO;
+            case 'turma-1':
+              return TurmaRole.TURMA1;
+            case 'turma-2':
+              return TurmaRole.TURMA2;
+            case 'turma-3':
+              return TurmaRole.TURMA3;
+            default:
+              throw new Error("Invalid user role");
+          }
+    }
+
+    static stringToFaseRole(input: string): FaseRole{
+        switch (input) {
+            case 'introducao':
+              return FaseRole.INTRO;
+            case 'labs':
+              return FaseRole.LABS;
+            case 'beta':
+              return FaseRole.BETA
+            default:
+              throw new Error("Invalid user role");
+          }
+    }
     
 
 }

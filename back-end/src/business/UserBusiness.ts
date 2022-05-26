@@ -62,6 +62,7 @@ export default class UserBusiness {
       await this.userDatabase.insert(newUser);
 
       const token = this.authenticator.generate({ id, role });
+      console.log(token)
       return token;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
@@ -110,9 +111,10 @@ export default class UserBusiness {
       }
 
       const token = this.authenticator.generate({
-        id: registeredUser.id,
-        role: registeredUser.role,
+        id: registeredUser.user_id,
+        role: registeredUser.user_role,
       });
+
       return token;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
