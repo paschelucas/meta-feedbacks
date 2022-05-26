@@ -29,13 +29,15 @@ export class AnswerBusiness {
         throw new CustomError(404, "Pergunta não encontrada.");
       }
 
-      const foundLeaguer = await this.leaguerDatabase.findById(leaguerId);
+      const foundLeaguer = await this.leaguerDatabase.findLeaguerById(
+        leaguerId
+      );
       if (!foundLeaguer) {
         throw new CustomError(404, "Leaguer não encontrado.");
       }
 
       const foundUser = await this.userDatabase.findById(userId);
-      console.log(foundUser)
+      console.log(foundUser);
       if (!foundUser) {
         throw new CustomError(404, "Usuário não encontrado.");
       }
