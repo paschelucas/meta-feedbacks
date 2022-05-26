@@ -17,8 +17,8 @@ const GlobalStyle = createGlobalStyle`
 const App = () => {
   return (
     <div>
-        <GlobalStyle/>
-        <Router/>
+      <GlobalStyle />
+      <Router />
     </div>
   );
 }
