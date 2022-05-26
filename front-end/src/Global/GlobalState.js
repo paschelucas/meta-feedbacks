@@ -37,7 +37,7 @@ const GlobalState = (props) => {
         goToLogin(navigate)
     };
 
-    const value = {login, isLoading};
+    const value = {login, isLoading, signup};
 
     return (
         <GlobalContext.Provider value={value}>
