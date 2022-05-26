@@ -25,16 +25,15 @@ export default class LeaguerDatabase extends BaseDatabase {
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);      
     }
-  }
+  };
 
-  findById = async (id: string) => {
+  findByUserId = async (id: string) => {
     try {
-      const queryResult: FindByEmailResponse = await this.connection(
-        this.TABLE_NAME
-      )
-        .select("*")
-        .where({ leaguer_id: id });
-      return queryResult[0];
+      const queryResult: FindByEmailResponse = await this
+      .connection(this.TABLE_NAME)
+      .select("*")
+      .where({ leaguer_responsavel: id });
+      return queryResult;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }

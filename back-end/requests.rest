@@ -22,6 +22,18 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Teste3",
+    "email": "teste3@lab.com",
+    "password": "Teste31234",
+    "role": "gestor"
+}
+
+###
+
 POST http://localhost:3003/user/login
 Content-Type: application/json
 
@@ -29,6 +41,17 @@ Content-Type: application/json
     "email": "teste2@lab.com",
     "password": "Teste21234"
 }
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "teste3@lab.com",
+    "password": "Teste31234"
+}
+
 
 ###
 
@@ -46,19 +69,19 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmIt
 
 POST http://localhost:3003/leaguers/create
 Content-Type: application/json
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMzU3NCwiZXhwIjoxNjUzNTI1Mzc0fQ.4mToMmXO5Jt0PsozicjjD7GjBWz7-_lrwPY_ZJoQvGo
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
 
 {
-    "name": "Teste2",
-    "turma": "turma-1",
-    "fase": "labs"
+    "name": "Teste3",
+    "turma": "turma-2",
+    "fase": "labs",
+    "responsavel": "Teste3"
 }
 
 ###
 
-GET http://localhost:3003/leaguers/
+GET http://localhost:3003/leaguers
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMzU3NCwiZXhwIjoxNjUzNTI1Mzc0fQ.4mToMmXO5Jt0PsozicjjD7GjBWz7-_lrwPY_ZJoQvGo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
 
-###
 
