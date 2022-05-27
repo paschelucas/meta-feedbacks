@@ -36,7 +36,7 @@ export class AnswerBusiness {
         throw new CustomError(404, "Leaguer não encontrado.");
       }
 
-      const foundUser = await this.userDatabase.findById(userId);
+      const foundUser = await this.userDatabase.getUserById(userId);
       if (!foundUser) {
         throw new CustomError(404, "Usuário não encontrado.");
       }

@@ -73,7 +73,7 @@ export default class UserBusiness {
 
       const token = this.authenticator.generate({ id, role });
 
-      const auth = {token, role}
+      const auth = {token, name, role}
 
       return auth;
 
@@ -114,12 +114,14 @@ export default class UserBusiness {
 
       const role = registeredUser.user_role
 
+      const name = registeredUser.user_name
+
       const token = this.authenticator.generate({
         id: registeredUser.user_id,
         role
       });
 
-      const auth = {token, role}
+      const auth = {token, name, role}
 
       return auth;
 
