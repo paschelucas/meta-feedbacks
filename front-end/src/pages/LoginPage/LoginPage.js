@@ -5,9 +5,12 @@ import { ContainerLogin,Input,Img,H3,Button,Span,ImgFeedbacks, ImgLogo} from "./
 import background from '../../assets/img/background.png'
 import logo from '../../assets/img/logo.png'
 import logofeedbacks from '../../assets/img/logofeedbacks.png'
+import useProtectedPage from '../../hooks/useProtectedPage'
+
 const LoginPage = () => {
+  useProtectedPage();
   const {register, handleSubmit, formState: {errors}} = useForm();
-  const {login} = useContext(GlobalContext);
+  const {login, isLoading, errorMessage} = useContext(GlobalContext);
 
   return (
     <div>
@@ -18,9 +21,9 @@ const LoginPage = () => {
       <H3><strong>Bem vindo!</strong></H3>
       <Span>Faça o seu login.</Span>
       <form onSubmit={handleSubmit(login)}>
-        <Input {...register("name", {required: "Precisa ter um nome"})} type="text" placeholder="digite seu login"/>
-        {errors ? <p>{errors.name?.message}</p> : <></>}
-        <Input {...register("password", {required: true})} type="text" placeholder="digite sua senha"/>
+        <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
+        {errors ? <p>{errorMessage}</p> : <></>}
+        <Input {...register("password", {required: true})} type="password" placeholder="digite sua senha"/>
         {errors ? <p>{errors.password?.message}</p> : <></>}
         <Button type="submit">ENTRAR</Button>
       </form>
