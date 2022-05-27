@@ -37,7 +37,6 @@ export class AnswerBusiness {
       }
 
       const foundUser = await this.userDatabase.findById(userId);
-      console.log(foundUser);
       if (!foundUser) {
         throw new CustomError(404, "Usuário não encontrado.");
       }
@@ -51,6 +50,20 @@ export class AnswerBusiness {
       );
 
       await this.answerDatabase.postAnswer(newAnswer);
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
+
+  public getAnswersByLeaguerId = async (id: string): Promise<Answer[]> => {
+    try {
+      if (!id) {
+        throw new CustomError(422, "Id de leaguer não enviado.");
+      }
+
+      const answers = await this.answerDatabase.getAnswersByLeaguerId(id);
+
+      return answers;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }

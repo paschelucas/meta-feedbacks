@@ -17,4 +17,15 @@ export class AnswerDatabase extends BaseDatabase {
       throw new Error(error.sqlMessage || error.message);
     }
   };
+
+  public getAnswersByLeaguerId = async (id: string): Promise<Answer[]> => {
+    try {
+      const answers = await this.connection(this.TABLE_NAME).where("leaguer_id", id);
+
+      return answers
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+      
+    }
+  }
 }

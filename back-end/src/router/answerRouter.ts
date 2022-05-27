@@ -22,3 +22,4 @@ const answerController = new AnswerController(
 );
 
 answerRouter.post("/post", answerController.postAnswer);
+answerRouter.get("/:leaguerId", answerController.getAnswersByLeaguerId);
