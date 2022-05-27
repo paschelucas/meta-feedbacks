@@ -14,6 +14,17 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
+  getAllUsers = async () => {
+    try {
+      const result: FindUserResponse = await this.connection(this.TABLE_NAME)
+      .select("user_id", "user_name", "user_email", "user_role")
+      return result;
+
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
+
   findByEmail = async (email: string) => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)

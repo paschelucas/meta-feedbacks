@@ -16,10 +16,19 @@ export default class UserBusiness {
     private hashManager: HashManager
   ) {}
 
-  signUp = async (input: UserInputDTO): Promise<any> => {
+  signUp = async (input: UserInputDTO, adminToken: string): Promise<any> => {
     try {
       const { name, email, password, role } = input;
       const newRole = User.stringToUserRole(role);
+      const tokenData = await this.authenticator.getTokenData(adminToken)
+
+      if (!tokenData) {
+        throw new CustomError(422, "Token inválido ou não passado.");
+      }
+      
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
 
       if (!name || !email || !password || !newRole) {
         throw new CustomError(422, "Favor preencher todos os campos.");
@@ -130,6 +139,27 @@ export default class UserBusiness {
     }
   };
 
+  getAllUsers = async (token: string) => {
+    try {
+      const tokenData = this.authenticator.getTokenData(token);
+      
+      if (!tokenData) {
+        throw new CustomError(422, "Token inválido ou não passado.");
+      }
+      
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
+
+      const users = await this.userDatabase.getAllUsers();
+
+      return users;
+
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  }
+
   editUserRole = async (input: EditRoleInputDTO, token: string) => {
 
     try {
@@ -141,11 +171,11 @@ export default class UserBusiness {
       const tokenData = this.authenticator.getTokenData(token);
       
       if (!tokenData) {
-        throw new Error("Token inválido ou não passado.");
+        throw new CustomError(422, "Token inválido ou não passado.");
       }
       
       if (tokenData.role !== "admin") {
-        throw new Error("Usuário não autorizado.");
+        throw new CustomError(403, "Usuário não autorizado.");
       }
       
       const registeredUser = await this.userDatabase.getUserByName(userName);
