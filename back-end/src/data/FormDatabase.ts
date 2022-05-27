@@ -15,6 +15,16 @@ export class FormDatabase extends BaseDatabase {
     }
   };
 
+  public getAllForms = async (): Promise<Form[]> => {
+    try {
+      const forms = await this.connection(this.TABLE_NAME);
+
+      return forms;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+
   public getFormById = async (id: string): Promise<Form[] | undefined> => {
     try {
       const [foundForm] = await this.connection(this.TABLE_NAME).where(id);
@@ -24,6 +34,7 @@ export class FormDatabase extends BaseDatabase {
       throw new Error(error.sqlMessage || error.message);
     }
   };
+
   public getFormByName = async (name: string): Promise<Form[] | undefined> => {
     try {
       const [foundForm] = await this.connection(this.TABLE_NAME).where(

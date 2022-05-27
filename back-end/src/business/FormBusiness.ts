@@ -28,4 +28,15 @@ export class FormBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  public getAllForms = async (): Promise<Form[]> => {
+    try {
+      const forms = await this.formDatabase.getAllForms();
+
+      return forms
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+
+    }
+  }
 }

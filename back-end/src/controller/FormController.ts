@@ -27,4 +27,15 @@ export class FormController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public getAllForms = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const forms = await this.formBusiness.getAllForms();
+
+      res.status(200).send({forms: forms})
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
 }

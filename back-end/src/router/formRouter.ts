@@ -11,3 +11,4 @@ const formBusiness = new FormBusiness(new FormDatabase());
 const formController = new FormController(new IdGenerator(), formBusiness);
 
 formRouter.post("/create", formController.createForm);
+formRouter.get("/", formController.getAllForms);
