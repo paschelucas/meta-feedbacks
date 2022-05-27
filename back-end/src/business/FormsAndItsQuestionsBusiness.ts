@@ -20,12 +20,12 @@ export class FormsAndItsQuestionsBusiness {
       if (!formId || !questionId) {
         throw new CustomError(422, "Por favor, preencha todos os campos.");
       }
-
+      
       const foundForm = await this.formDatabase.getFormById(formId);
       if (!foundForm) {
         throw new CustomError(404, "Formulário não encontrado.");
       }
-
+  
       const foundQuestion = await this.questionDatabase.getQuestionById(
         questionId
       );

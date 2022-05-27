@@ -3,7 +3,7 @@ import { FormsAndItsQuestionsBusiness } from "../business/FormsAndItsQuestionsBu
 import { IdGenerator } from "../services/generateId";
 import { InsertQuestionInAFormDTO } from "../types/DTO/InsertQuestionInAFormDTO";
 
-export class FormAndItsQuestionsController {
+export class FormsAndItsQuestionsController {
   constructor(
     private formAndItsQuestionsBusiness: FormsAndItsQuestionsBusiness,
     private idGenerator: IdGenerator
