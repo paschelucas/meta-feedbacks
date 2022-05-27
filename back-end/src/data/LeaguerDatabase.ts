@@ -7,9 +7,7 @@ export default class LeaguerDatabase extends BaseDatabase {
 
   insert = async (leaguer: Leaguer): Promise<void> => {
     try {
-      await this
-      .connection(this.TABLE_NAME)
-      .insert(leaguer);
+      await this.connection(this.TABLE_NAME).insert(leaguer);
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
@@ -19,22 +17,34 @@ export default class LeaguerDatabase extends BaseDatabase {
     try {
       const queryResult: FindByEmailResponse = await this.connection(
         this.TABLE_NAME
-      )
-        .select("*")
-      return queryResult
+      ).select("*");
+      return queryResult;
     } catch (error: any) {
-      throw new Error(error.sqlMessage || error.message);      
+      throw new Error(error.sqlMessage || error.message);
     }
-  }
+  };
 
-  findById = async (id: string) => {
+  findByUserId = async (id: string) => {
     try {
       const queryResult: FindByEmailResponse = await this.connection(
         this.TABLE_NAME
       )
         .select("*")
-        .where({ leaguer_id: id });
-      return queryResult[0];
+        .where({ leaguer_responsavel: id });
+      return queryResult;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+
+  public findLeaguerById = async (id: string): Promise<Leaguer | undefined> => {
+    try {
+      const [leaguer] = await this.connection(this.TABLE_NAME).where(
+        "leaguer_id",
+        id
+      );
+
+      return leaguer;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
