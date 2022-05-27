@@ -16,7 +16,7 @@ export default class UserBusiness {
     private hashManager: HashManager
   ) {}
 
-  signUp = async (input: UserInputDTO): Promise<string> => {
+  signUp = async (input: UserInputDTO): Promise<any> => {
     try {
       const { name, email, password, role } = input;
       const newRole = User.stringToUserRole(role);
@@ -64,7 +64,10 @@ export default class UserBusiness {
 
       const token = this.authenticator.generate({ id, role });
 
-      return token;
+      const auth = {token, role}
+
+      return auth;
+
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
@@ -111,12 +114,17 @@ export default class UserBusiness {
         throw new CustomError(403, "Email ou senha incorretos.");
       }
 
+      const role = registeredUser.user_role
+
       const token = this.authenticator.generate({
         id: registeredUser.user_id,
-        role: registeredUser.user_role,
+        role
       });
 
-      return token;
+      const auth = {token, role}
+
+      return auth;
+
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }

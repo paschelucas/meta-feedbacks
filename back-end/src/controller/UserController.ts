@@ -17,10 +17,10 @@ export default class UserController {
       role,
     };
     try {
-      const token = await this.userBusiness.signUp(input);
+      const auth = await this.userBusiness.signUp(input);
       res
         .status(201)
-        .send({ message: "Usuário cadastrado com sucesso.", token: token });
+        .send({ message: "Usuário cadastrado com sucesso.", auth: auth });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
@@ -35,10 +35,10 @@ export default class UserController {
     };
 
     try {
-      const token = await this.userBusiness.login(input);
+      const auth = await this.userBusiness.login(input);
       res
         .status(200)
-        .send({ message: "Login efetuado com sucesso.", token: token });
+        .send({ message: "Login efetuado com sucesso.", auth: auth });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
