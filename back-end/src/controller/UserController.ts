@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserBusiness from "../business/UserBusiness";
 import { UserInputDTO } from "../types/DTO/UserInputDTO";
 import { LoginInputDTO } from "../types/DTO/LoginInputDTO";
+import { EditRoleInputDTO } from "../types/DTO/EditRoleInputDTO";
 
 export default class UserController {
   constructor(private userBusiness: UserBusiness) {}
@@ -41,6 +42,26 @@ export default class UserController {
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
+    }
+  };
+
+  public editUserRole = async (req: Request, res: Response) => {
+    const {userName, newRole} = req.body
+    const token = req.headers.authorization as string
+    const input: EditRoleInputDTO = {
+      userName,
+      newRole
+    }
+    
+    try {
+      const userPermission = await this.userBusiness.editUserRole(input, token);
+      res
+      .status(201)
+      .send({message: "Permissão atualizada com sucesso", userPermission})
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+      
     }
   };
 }

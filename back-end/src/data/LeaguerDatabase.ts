@@ -1,11 +1,11 @@
 import { BaseDatabase } from "./BaseDatabase";
 import Leaguer from "../model/Leaguer";
-import { FindByEmailResponse } from "../types/findByEmailResponse";
+import { FindUserResponse } from "../types/findUserResponse";
 
 export default class LeaguerDatabase extends BaseDatabase {
   protected TABLE_NAME = "leaguers";
 
-  insert = async (leaguer: Leaguer): Promise<void> => {
+  public insert = async (leaguer: Leaguer): Promise<void> => {
     try {
       await this.connection(this.TABLE_NAME).insert(leaguer);
     } catch (error: any) {
@@ -13,9 +13,9 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  getAllLeaguers = async () => {
+  public getAllLeaguers = async () => {
     try {
-      const queryResult: FindByEmailResponse = await this.connection(
+      const queryResult: FindUserResponse = await this.connection(
         this.TABLE_NAME
       ).select("*");
       return queryResult;
@@ -24,9 +24,9 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  findByUserId = async (id: string) => {
+  public findByUserId = async (id: string) => {
     try {
-      const queryResult: FindByEmailResponse = await this.connection(
+      const queryResult: FindUserResponse = await this.connection(
         this.TABLE_NAME
       )
         .select("*")

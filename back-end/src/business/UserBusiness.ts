@@ -6,6 +6,7 @@ import { IdGenerator } from "../services/generateId";
 import { LoginInputDTO } from "../types/DTO/LoginInputDTO";
 import { UserInputDTO } from "../types/DTO/UserInputDTO";
 import { CustomError } from "../error/CustomError";
+import { EditRoleInputDTO } from "../types/DTO/EditRoleInputDTO";
 
 export default class UserBusiness {
   constructor(
@@ -119,5 +120,37 @@ export default class UserBusiness {
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
+  };
+
+  editUserRole = async (input: EditRoleInputDTO, token: string) => {
+
+    try {
+      const {userName, newRole} = input
+      if(!userName || !newRole){
+        throw new CustomError(422, "Favor preencher todos os campos.");
+      }
+      
+      const tokenData = this.authenticator.getTokenData(token);
+      
+      if (!tokenData) {
+        throw new Error("Token inválido ou não passado.");
+      }
+      
+      if (tokenData.role !== "admin") {
+        throw new Error("Usuário não autorizado.");
+      }
+      
+      const registeredUser = await this.userDatabase.getUserByName(userName);
+      if (!registeredUser) {
+        throw new CustomError(422, "Usuário não cadastrado.");
+      }
+
+        const newAuthorization = await this.userDatabase.editUserRole(input);
+
+        return newAuthorization;
+      
+      } catch (error: any) {
+        throw new CustomError(error.statusCode, error.message);
+      }
   };
 }
