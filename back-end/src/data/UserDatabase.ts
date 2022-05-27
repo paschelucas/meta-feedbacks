@@ -29,7 +29,6 @@ export default class UserDatabase extends BaseDatabase {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
         .where("user_id", id);
-      console.log(queryResult)
       return queryResult;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);

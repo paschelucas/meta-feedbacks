@@ -28,4 +28,17 @@ export class AnswerController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public getAnswersByLeaguerId = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const leaguerId = req.params.leaguerId;
+
+      const answers = await this.answerBusiness.getAnswersByLeaguerId(leaguerId);
+
+      res.status(200).send({answers: answers})
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  }
 }
