@@ -54,7 +54,7 @@ export default class UserBusiness {
         );
       }
 
-      const registeredUser = await this.userDatabase.findByEmail(email);
+      const registeredUser = await this.userDatabase.getUserByEmail(email);
       if (registeredUser) {
         throw new CustomError(422, "Email já cadastrado.");
       }
@@ -99,18 +99,7 @@ export default class UserBusiness {
         throw new CustomError(422, "Formato de email inválido.");
       }
 
-      const validPasswordVerifier: RegExp =
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{9,}$/;
-      const isPasswordValid = validPasswordVerifier.test(password);
-
-      if (!isPasswordValid) {
-        throw new CustomError(
-          422,
-          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
-        );
-      }
-
-      const registeredUser = await this.userDatabase.findByEmail(email);
+      const registeredUser = await this.userDatabase.getUserByEmail(email);
       if (!registeredUser) {
         throw new CustomError(404, "Este usuário não está cadastrado.");
       }

@@ -25,7 +25,7 @@ export default class UserDatabase extends BaseDatabase {
     }
   }
 
-  findByEmail = async (email: string) => {
+  getUserByEmail = async (email: string) => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
@@ -36,7 +36,7 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  findById = async (id: string): Promise<User | undefined> => {
+  getUserById = async (id: string): Promise<User | undefined> => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")

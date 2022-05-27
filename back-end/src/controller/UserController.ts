@@ -22,6 +22,7 @@ export default class UserController {
       res
         .status(201)
         .send({ message: "Usuário cadastrado com sucesso.", auth: auth });
+        
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
