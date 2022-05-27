@@ -40,10 +40,16 @@ CREATE TABLE answers(
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-CREATE TABLE forms(  
+CREATE TABLE forms (
+  form_id VARCHAR(255) NOT NULL PRIMARY KEY,
+  form_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE forms_and_its_questions(
+  bond_id VARCHAR(255) NOT NULL PRIMARY KEY,
   form_id VARCHAR(255) NOT NULL,
-  form_name VARCHAR(255) NOT NULL,
-  question_id VARCHAR(255) NOT NULL
+  question_id VARCHAR(255) NOT NULL,
+  FOREIGN KEY (form_id) REFERENCES forms (form_id),
+  FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
    `
       )
