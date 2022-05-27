@@ -1,31 +1,77 @@
 import GlobalContext from "./GlobalContext";
 import useRequest from '../hooks/useRequest.js';
-import tokenMock from "../mocks/tokenMock";
-import { goToHome } from "../routes/coordinator";
+import { goToLogin } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
+import { base_URL } from '../constants/urls';
+import { useState } from "react";
 
 const GlobalState = (props) => {
 
     const {makeRequest, isLoading} = useRequest();
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [userRole, setUserRole] = useState('');
 
-    // simulação do comportamento do login
-    const login = (data) => {
-            const token = tokenMock;  
+    const login = async (data) => {
+        const res = await makeRequest('post', `${base_URL}user/login`, data);
 
-            console.log(data);
+        console.log(res);
 
-            if (token) {
-                localStorage.setItem("token", token);
+        if (res.auth) {
+            setUserRole(res.auth.role);
+            localStorage.setItem('token', res.auth.token);
+        }
+
+        else {
+            setErrorMessage(res);
+        }
+
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        goToLogin(navigate);
+    };
+    
+    const signup = async (data) => {
+        const res = await makeRequest('post', `${base_URL}user/signup`, data);
+
+        if (res.token) localStorage.setItem('token', res.token);
+
+        else {
+            setErrorMessage(res);
+        }    
+    };
+
+    const leaguersSignup = async (data) => {
+        const token = localStorage.getItem('token');
+
+        const header = {
+            headers: {
+                Authorization: token
             }
-            else {
-                alert('Deu ruim');
+        }
+
+        const res = await makeRequest('post', `${base_URL}leaguers/create`, data, header);
+        
+        console.log(res);
+    }
+
+    const getLeaguers = async () => {
+        const token = localStorage.getItem('token');
+
+        const header = {
+            headers: {
+                Authorization: token
             }
+        }
 
-            goToHome(navigate)
-    }; 
+        const res = await makeRequest('get', `${base_URL}leaguers`, header);
 
-    const value = {login, isLoading};
+        console.log(res);
+    };
+
+    const value = { isLoading, errorMessage, login, logout, signup, leaguersSignup, getLeaguers };
 
     return (
         <GlobalContext.Provider value={value}>

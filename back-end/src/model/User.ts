@@ -28,6 +28,19 @@ export default class User {
         return this.user_role
     }
 
+    static stringToUserRole(input: string): UserRole{
+        switch (input) {
+            case 'admin':
+              return UserRole.ADMIN;
+            case 'mentor':
+              return UserRole.MENTOR;
+            case 'gestor':
+              return UserRole.GESTOR;
+            default:
+              throw new Error("Invalid user role");
+          }
+    }
+
 
 }
 

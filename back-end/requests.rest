@@ -1,0 +1,102 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Teste",
+    "email": "teste@lab.com",
+    "password": "Teste1234",
+    "role": "mentor"
+}
+
+###
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Teste2",
+    "email": "teste2@lab.com",
+    "password": "Teste21234",
+    "role": "admin"
+}
+
+###
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Teste3",
+    "email": "teste3@lab.com",
+    "password": "Teste31234",
+    "role": "gestor"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "teste2@lab.com",
+    "password": "Teste21234"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "teste3@lab.com",
+    "password": "Teste31234"
+}
+
+
+###
+
+POST http://localhost:3003/leaguers/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzUyMTA1MiwiZXhwIjoxNjUzNTIyODUyfQ.tU0ZQDN_RUR3kBfiG2u0srlmiwCyBlbwKW_vXAYuHZY
+
+{
+    "name": "Teste",
+    "turma": "turma-piloto",
+    "fase": "introducao"
+}
+
+###
+
+POST http://localhost:3003/leaguers/create
+Content-Type: application/json
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
+
+{
+    "name": "Teste3",
+    "turma": "turma-2",
+    "fase": "labs",
+    "responsavel": "Teste3"
+}
+
+###
+
+GET http://localhost:3003/leaguers
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
+
+###
+
+PUT http://localhost:3003/user/role
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzYyMDExNCwiZXhwIjoxNjUzNjIxOTE0fQ.tVZq6XCMcLLqDrWQFqKrCPIgdi0Hv_WewfqbTrvDRMc
+
+{
+    "userName": "Teste",
+    "newRole": "admin"
+}
+
+###
+
+GET http://localhost:3003/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiYThhOGZmLTdmYjMtNDI4Mi04ODQ2LTcwN2RiM2ZlZGZlNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzY3ODk2OCwiZXhwIjoxNjUzNzA3NzY4fQ.Xr1R9h6io0dCjGH0_6LGS8kveh6t6wJX6Cfo2MPNLC0

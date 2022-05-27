@@ -1,1 +1,1 @@
-export const base_URL = '';
+export const base_URL = 'https://meta-feedbacks.herokuapp.com/';

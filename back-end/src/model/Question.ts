@@ -1,11 +1,11 @@
 export class Question {
-  constructor(private questionId: string, private questionText: string) {}
+  constructor(private id: string, private text: string) {}
 
   public getId = (): string => {
-    return this.questionId;
+    return this.id;
   };
 
   public getText = (): string => {
-    return this.questionText;
+    return this.text;
   };
 }
