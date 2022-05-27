@@ -94,3 +94,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmIt
     "userName": "Teste",
     "newRole": "admin"
 }
+
+###
+
+GET http://localhost:3003/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2ItNGRmOC04Mzg1LTI3ZmNhODhjMTBlZCIsInJvbGUiOiJnZXN0b3IiLCJpYXQiOjE2NTM2NzQ5NzMsImV4cCI6MTY1MzY3Njc3M30.8Vstn3P8AXVzhjWxXM2REwltlUbta5C-Ldn0RNwMv8M

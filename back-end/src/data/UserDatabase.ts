@@ -14,7 +14,18 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  findByEmail = async (email: string) => {
+  getAllUsers = async () => {
+    try {
+      const result: FindUserResponse = await this.connection(this.TABLE_NAME)
+      .select("user_id", "user_name", "user_email", "user_role")
+      return result;
+
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
+
+  getUserByEmail = async (email: string) => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
@@ -25,7 +36,7 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  findById = async (id: string): Promise<User | undefined> => {
+  getUserById = async (id: string): Promise<User | undefined> => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
