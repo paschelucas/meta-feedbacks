@@ -4,16 +4,18 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import MenuPage from "../pages/MenuPage/MenuPage";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <GlobalState>
       <Routes>
-        <Route path="/" element={<LoginPage/>} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/login" element={<LoginPage/>} />
         <Route path="/cadastro" element={<SignUpPage/>} />
-        <Route path="/home" element={<HomePage/>} />
-        <Route path="/*" element={<ErrorPage/>}/>
+        <Route path="/menu" element={<MenuPage/>} />
+        <Route path="/*" element={<ErrorPage/>} />
       </Routes>
       </GlobalState>
     </BrowserRouter>
