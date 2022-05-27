@@ -84,4 +84,13 @@ GET http://localhost:3003/leaguers
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
 
+###
 
+PUT http://localhost:3003/user/role
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzYyMDExNCwiZXhwIjoxNjUzNjIxOTE0fQ.tVZq6XCMcLLqDrWQFqKrCPIgdi0Hv_WewfqbTrvDRMc
+
+{
+    "userName": "Teste",
+    "newRole": "admin"
+}
