@@ -13,10 +13,10 @@ const useRequest = () => {
         } 
         catch (error) {
             setisLoading(false);
-            return error.response;
+            return error.response.data.message;
         }
     };
 
-    return [makeRequest, isLoading];
+    return {makeRequest, isLoading};
 };
 export default useRequest;
