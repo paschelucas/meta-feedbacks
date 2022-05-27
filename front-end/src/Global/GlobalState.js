@@ -1,7 +1,6 @@
 import GlobalContext from "./GlobalContext";
 import useRequest from '../hooks/useRequest.js';
-import tokenMock from "../mocks/tokenMock";
-import { goToHome, goToLogin } from "../routes/coordinator";
+import { goToLogin } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { base_URL } from '../constants/urls';
 import { useState } from "react";
@@ -11,15 +10,22 @@ const GlobalState = (props) => {
     const {makeRequest, isLoading} = useRequest();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
+    const [userRole, setUserRole] = useState('');
 
     const login = async (data) => {
         const res = await makeRequest('post', `${base_URL}user/login`, data);
-        
-        if (res.token) localStorage.setItem('token', res.token);
+
+        console.log(res);
+
+        if (res.auth) {
+            setUserRole(res.auth.role);
+            localStorage.setItem('token', res.auth.token);
+        }
 
         else {
             setErrorMessage(res);
         }
+
     };
 
     const logout = () => {
@@ -28,9 +34,13 @@ const GlobalState = (props) => {
     };
     
     const signup = async (data) => {
-        const {token} = await makeRequest('post', `${base_URL}user/signup`, data);
+        const res = await makeRequest('post', `${base_URL}user/signup`, data);
 
-        localStorage.setItem('token', token);
+        if (res.token) localStorage.setItem('token', res.token);
+
+        else {
+            setErrorMessage(res);
+        }    
     };
 
     const leaguersSignup = async (data) => {
@@ -56,7 +66,7 @@ const GlobalState = (props) => {
             }
         }
 
-        const res = await makeRequest('post', `${base_URL}leaguers`, header);
+        const res = await makeRequest('get', `${base_URL}leaguers`, header);
 
         console.log(res);
     };
