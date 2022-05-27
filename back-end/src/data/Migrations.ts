@@ -39,6 +39,12 @@ CREATE TABLE answers(
   FOREIGN KEY (leaguer_id) REFERENCES leaguers (leaguer_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+CREATE TABLE forms(  
+  form_id VARCHAR(255) NOT NULL,
+  form_name VARCHAR(255) NOT NULL,
+  question_id VARCHAR(255) NOT NULL
+);
    `
       )
       .then(() => {
