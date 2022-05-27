@@ -34,4 +34,39 @@ export class FormsAndItsQuestionsController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public removeQuestionFromAForm = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { formId } = req.params;
+      const { questionId } = req.body;
+
+      await this.formAndItsQuestionsBusiness.removeQuestionFromAForm(formId, questionId);
+
+      res
+        .status(201)
+        .send({ message: "Pergunta removida do formulário com sucesso." });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
+
+  public getQuestionsByFormId = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { formId } = req.params;
+
+      const questions = await this.formAndItsQuestionsBusiness.getQuestionsByFormId(formId);
+
+      res
+        .status(201)
+        .send({ questions: questions });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+
+    }
+  }
 }

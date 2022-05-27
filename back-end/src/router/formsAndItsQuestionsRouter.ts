@@ -20,3 +20,5 @@ const formsAndItsQuestionsController = new FormsAndItsQuestionsController(
 );
 
 formsAndItsQuestionsRouter.post("/:formId/insert", formsAndItsQuestionsController.insertQuestionInAForm)
+formsAndItsQuestionsRouter.delete("/:formId/remove", formsAndItsQuestionsController.removeQuestionFromAForm)
+formsAndItsQuestionsRouter.get("/:formId", formsAndItsQuestionsController.getQuestionsByFormId)
