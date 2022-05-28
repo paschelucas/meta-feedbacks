@@ -55,10 +55,12 @@ export class QuestionController {
     try {
       const id = req.params.id;
       const { newText } = req.body;
+      const token = req.headers.authorization as string;
 
       const updateQuestionInput: UpdateQuestionInputDTO = {
         id,
         newText,
+        token
       };
 
       await this.questionBusiness.updateQuestion(updateQuestionInput);
