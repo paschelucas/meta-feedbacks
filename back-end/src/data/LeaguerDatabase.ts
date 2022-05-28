@@ -1,6 +1,8 @@
 import { BaseDatabase } from "./BaseDatabase";
-import Leaguer from "../model/Leaguer";
+import Leaguer, { FaseRole } from "../model/Leaguer";
 import { FindUserResponse } from "../types/findUserResponse";
+import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
+import { LeaguerResponse } from "../types/leaguerResponse";
 
 export default class LeaguerDatabase extends BaseDatabase {
   protected TABLE_NAME = "leaguers";
@@ -45,6 +47,23 @@ export default class LeaguerDatabase extends BaseDatabase {
       );
 
       return leaguer;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+
+  editLeaguerFase = async (input: EditFaseInputDTO) => {
+    try {
+      const result = await this.connection(this.TABLE_NAME)
+      .update({leaguer_fase: input.newFase})
+      .where({leaguer_id: input.leaguerId})
+
+      const alteredLeaguer: LeaguerResponse = await this.connection(this.TABLE_NAME)
+      .select("*")
+      .where({leaguer_id: input.leaguerId})
+
+      return alteredLeaguer[0]
+
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }

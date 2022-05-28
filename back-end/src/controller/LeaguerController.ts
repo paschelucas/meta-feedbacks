@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import LeaguerBusiness from "../business/LeaguerBusiness";
+import { FaseRole } from "../model/Leaguer";
+import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
 import { LeaguerInputDTO } from "../types/DTO/LeaguerInputDTO";
 
 export default class LeaguerController {
@@ -40,7 +42,7 @@ export default class LeaguerController {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
     }
-  }
+  };
 
   public getLeaguersByUserId = async (req:Request, res: Response) => {
     const token = req.headers.authorization as string
@@ -50,6 +52,27 @@ export default class LeaguerController {
       res
       .status(200)
       .send(leaguers)
+
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
+
+  public editLeaguerFase = async (req: Request, res: Response) => {
+    const {leaguerId, newFase} = req.body
+    const token = req.headers.authorization as string;
+
+    const input: EditFaseInputDTO = {
+      leaguerId,
+      newFase
+    }
+
+    try {
+      const leaguer = await this.leaguerBusiness.editLeaguerFase(token,input);
+      res
+        .status(201)
+        .send({ message: "Fase do leaguer alterada com sucesso.", leaguer });
 
     } catch (error: any) {
       const { statusCode, message } = error;

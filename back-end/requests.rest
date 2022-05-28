@@ -88,7 +88,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmIt
 
 PUT http://localhost:3003/user/role
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzYyMDExNCwiZXhwIjoxNjUzNjIxOTE0fQ.tVZq6XCMcLLqDrWQFqKrCPIgdi0Hv_WewfqbTrvDRMc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzcwMzYyOCwiZXhwIjoxNjUzNzA1NDI4fQ.oykFQo86xVJ0P-AbLpUi2ywYf-8fFob8IpIIrmJAlOI
 
 {
     "userName": "Teste",
@@ -100,3 +100,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmIt
 GET http://localhost:3003/user
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2ItNGRmOC04Mzg1LTI3ZmNhODhjMTBlZCIsInJvbGUiOiJnZXN0b3IiLCJpYXQiOjE2NTM2NzQ5NzMsImV4cCI6MTY1MzY3Njc3M30.8Vstn3P8AXVzhjWxXM2REwltlUbta5C-Ldn0RNwMv8M
+
+###
+
+PUT http://localhost:3003/leaguers/editfase
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzcwNzQ3NiwiZXhwIjoxNjUzNzE0Njc2fQ.0CzuULKwE2GBDixjh5FbcInCuhkgSHCyEf5dnkVyemo
+
+{
+    "leaguerId": "80b70ee8-010a-4be5-a40f-dee8a2162d9c",
+    "newFase": "introducao"
+}
