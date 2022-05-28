@@ -58,4 +58,19 @@ export class ProjectDatabase extends BaseDatabase {
       throw new Error(error.sqlMessage || error.message);
     }
   };
+
+  public getProjectByName = async (
+    name: string
+  ): Promise<Project[] | undefined> => {
+    try {
+      const [project] = await this.connection(this.TABLE_NAME).where(
+        "project_name",
+        name
+      );
+
+      return project;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
 }
