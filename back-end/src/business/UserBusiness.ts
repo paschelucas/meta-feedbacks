@@ -7,6 +7,7 @@ import { LoginInputDTO } from "../types/DTO/LoginInputDTO";
 import { UserInputDTO } from "../types/DTO/UserInputDTO";
 import { CustomError } from "../error/CustomError";
 import { EditRoleInputDTO } from "../types/DTO/EditRoleInputDTO";
+import { EditPasswordInputDTO } from "../types/DTO/EditPasswordInputDTO";
 
 export default class UserBusiness {
   constructor(
@@ -164,6 +165,66 @@ export default class UserBusiness {
       const newAuthorization = await this.userDatabase.editUserRole(input);
 
       return newAuthorization;
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
+
+  editPassword = async (input: EditPasswordInputDTO) => {
+    try {
+      const { email, password, new_password } = input;
+
+      if (!email || !password) {
+        throw new CustomError(422, "Favor informar email e senha provisória.");
+      }
+
+    const validPasswordVerifier: RegExp =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{9,}$/;
+    const isPasswordValid = validPasswordVerifier.test(new_password);
+
+    if (!isPasswordValid) {
+      throw new CustomError(
+        422,
+        "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
+      );
+    }
+
+      const registeredUser = await this.userDatabase.getUserByEmail(email);
+      if (!registeredUser) {
+        throw new CustomError(404, "Este usuário não está cadastrado.");
+      }
+      const passwordIsCorrect = await this.hashManager.compare(
+        password,
+        registeredUser.user_password
+      );
+
+      if (!passwordIsCorrect) {
+        throw new CustomError(403, "Email ou senha provisória incorretos.");
+      }
+
+      const role = registeredUser.user_role
+      
+      const name = registeredUser.user_name
+
+      const hashPassword = await this.hashManager.hash(new_password);
+
+      const hashInput: EditPasswordInputDTO = {
+        email,
+        password,
+        new_password: hashPassword
+      }
+      
+      await this.userDatabase.editPassword(hashInput);
+
+      const token = this.authenticator.generate({
+        id: registeredUser.user_id,
+        role
+      });
+
+      const auth = {token, name, role}
+
+      return auth;
+
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }

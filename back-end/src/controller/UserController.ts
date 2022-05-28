@@ -3,6 +3,7 @@ import UserBusiness from "../business/UserBusiness";
 import { UserInputDTO } from "../types/DTO/UserInputDTO";
 import { LoginInputDTO } from "../types/DTO/LoginInputDTO";
 import { EditRoleInputDTO } from "../types/DTO/EditRoleInputDTO";
+import { EditPasswordInputDTO } from "../types/DTO/EditPasswordInputDTO";
 
 export default class UserController {
   constructor(private userBusiness: UserBusiness) {}
@@ -76,6 +77,27 @@ export default class UserController {
       res
       .status(201)
       .send({message: "Permissão atualizada com sucesso", userPermission})
+
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+      
+    }
+  };
+
+  public editPassword = async (req: Request, res: Response) => {
+    const {email, password, new_password} = req.body
+    const input: EditPasswordInputDTO = {
+      email,
+      password,
+      new_password
+    };
+    
+    try {
+      const userPermission = await this.userBusiness.editPassword(input);
+      res
+      .status(201)
+      .send({message: "Senha atualizada com sucesso", userPermission})
 
     } catch (error: any) {
       const { statusCode, message } = error;

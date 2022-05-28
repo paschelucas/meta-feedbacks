@@ -3,8 +3,10 @@ import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/generateId";
 import { LeaguerInputDTO } from "../types/DTO/LeaguerInputDTO";
 import { CustomError } from "../error/CustomError";
-import Leaguer from "../model/Leaguer";
+import Leaguer, { FaseRole } from "../model/Leaguer";
 import UserDatabase from "../data/UserDatabase";
+import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
+import { LeaguerResponse } from "../types/leaguerResponse";
 
 export default class LeaguerBusiness {
   constructor(
@@ -28,11 +30,11 @@ export default class LeaguerBusiness {
       const tokenData = this.authenticator.getTokenData(token);
 
       if (!tokenData) {
-        throw new Error("Token inválido ou não passado.");
+        throw new CustomError(422, "Token inválido ou não passado.");
       }
 
       if (tokenData.role !== "admin" && tokenData.role !== "mentor") {
-        throw new Error("Usuário não autorizado.");
+        throw new CustomError(403, "Usuário não autorizado.");
       }
 
       const user = await this.userDatabase.getUserByName(responsavel);
@@ -50,6 +52,7 @@ export default class LeaguerBusiness {
       await this.leaguerDatabase.insert(newLeaguer);
 
       return newLeaguer;
+
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
@@ -100,4 +103,31 @@ export default class LeaguerBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  editLeaguerFase = async (token: string, input:EditFaseInputDTO) => {
+    try {
+    const {leaguerId, newFase} = input
+      
+    if (!leaguerId || !newFase) {
+      throw new CustomError(422, "Favor informar id do leaguer e fase atualizada.");
+    }
+
+    const tokenData = this.authenticator.getTokenData(token);
+
+    if (!tokenData) {
+      throw new CustomError(422, "Token inválido ou não passado.");
+    }
+
+    if (tokenData.role !== "admin" && tokenData.role !== "mentor") {
+      throw new CustomError(403, "Usuário não autorizado.");
+    }
+
+    const newLeaguer = await this.leaguerDatabase.editLeaguerFase(input);
+
+    return newLeaguer;
+
+  } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+  }
+  }
 }
