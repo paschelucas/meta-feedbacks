@@ -13,10 +13,13 @@ export class FormController {
     try {
       const { formName } = req.body;
       const formId = this.idGenerator.generateId();
+      const token = req.headers.authorization as string;
+
 
       const formInput: FormDTO = {
         formId,
         formName,
+        token
       };
 
       await this.formBusiness.createForm(formInput);

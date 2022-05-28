@@ -3,11 +3,12 @@ import { FormBusiness } from "../business/FormBusiness";
 import { FormController } from "../controller/FormController";
 import { FormDatabase } from "../data/FormDatabase";
 import { FormsAndItsQuestionsDatabase } from "../data/FormsAndItsQuestionsDatabase";
+import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/generateId";
 
 export const formRouter = express.Router();
 
-const formBusiness = new FormBusiness(new FormDatabase(), new FormsAndItsQuestionsDatabase());
+const formBusiness = new FormBusiness(new FormDatabase(), new FormsAndItsQuestionsDatabase(), new Authenticator());
 
 const formController = new FormController(new IdGenerator(), formBusiness);
 

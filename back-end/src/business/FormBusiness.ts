@@ -2,14 +2,24 @@ import { FormDatabase } from "../data/FormDatabase";
 import { FormsAndItsQuestionsDatabase } from "../data/FormsAndItsQuestionsDatabase";
 import { CustomError } from "../error/CustomError";
 import { Form } from "../model/Form";
+import { Authenticator } from "../services/Authenticator";
 import { FormDTO } from "../types/DTO/FormDTO";
 
 export class FormBusiness {
-  constructor(private formDatabase: FormDatabase, private formsAndItsQuestionsDatabase: FormsAndItsQuestionsDatabase) {}
+  constructor(private formDatabase: FormDatabase, private formsAndItsQuestionsDatabase: FormsAndItsQuestionsDatabase, private authenticator: Authenticator) {}
 
   public createForm = async (form: FormDTO) => {
     try {
-      const { formId, formName } = form;
+      const { formId, formName, token } = form;
+
+      if (!token) {
+        throw new CustomError(401, "Usuário não identificado.");
+      }
+
+      const tokenData = this.authenticator.getTokenData(token);
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
 
       if (!formName) {
         throw new CustomError(
