@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { FormBusiness } from "../business/FormBusiness";
 import { IdGenerator } from "../services/generateId";
+import { DeleteFormDTO } from "../types/DTO/DeleteFormDTO";
 import { FormDTO } from "../types/DTO/FormDTO";
 
 export class FormController {
@@ -45,8 +46,14 @@ export class FormController {
   public deleteForm = async (req: Request, res: Response): Promise<void> => {
     try {
       const {id} = req.params;
+      const token = req.headers.authorization as string;
+      const deleteFormInput: DeleteFormDTO = {
+        id,
+        token
+      };
 
-      await this.formBusiness.deleteForm(id);
+
+      await this.formBusiness.deleteForm(deleteFormInput);
 
       res.status(200).send({message: "Formulário excluído com sucesso."})
     } catch (error: any) {
