@@ -17,3 +17,4 @@ const projectController = new ProjectController(
 );
 
 projectRouter.post("/create", projectController.createProject);
+projectRouter.get("/", projectController.getAllProjects);

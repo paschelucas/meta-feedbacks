@@ -29,4 +29,18 @@ export class ProjectController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public getAllProjects = async (req: Request, res: Response): Promise<void> => {
+    try {
+
+      const projects = await this.projectBusiness.getAllProjects();
+
+      res.status(200).send({ projects: projects });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
+
+
 }

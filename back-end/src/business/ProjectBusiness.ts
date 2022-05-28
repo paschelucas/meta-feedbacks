@@ -41,4 +41,15 @@ export class ProjectBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  public getAllProjects = async (): Promise<Project[]> => {
+    try {
+    
+      const projects = await this.projectDatabase.getAllProjects();
+
+      return projects
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
 }
