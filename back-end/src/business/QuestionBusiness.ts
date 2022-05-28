@@ -2,6 +2,7 @@ import { QuestionDatabase } from "../data/QuestionDatabase";
 import { CustomError } from "../error/CustomError";
 import { Question } from "../model/Question";
 import { Authenticator } from "../services/Authenticator";
+import { DeleteQuestionDTO } from "../types/DTO/DeleteQuestionDTO";
 import { QuestionDTO } from "../types/DTO/QuestionDTO";
 import { UpdateQuestionInputDTO } from "../types/DTO/UpdateQuestionInputDTO";
 
@@ -85,8 +86,19 @@ export class QuestionBusiness {
     }
   };
 
-  public deleteQuestion = async (id: string): Promise<void> => {
+  public deleteQuestion = async (deleteQuestionInput: DeleteQuestionDTO): Promise<void> => {
     try {
+      const {id, token} = deleteQuestionInput
+
+      if (!token) {
+        throw new CustomError(401, "Usuário não identificado.");
+      }
+
+      const tokenData = this.authenticator.getTokenData(token);
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
+      
       if (!id) {
         throw new CustomError(
           422,
