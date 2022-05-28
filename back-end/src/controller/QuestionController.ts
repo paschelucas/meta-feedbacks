@@ -17,10 +17,12 @@ export class QuestionController {
     try {
       const { text } = req.body;
       const id = this.idGenerator.generateId();
+      const token = req.headers.authorization as string;
 
       const question: QuestionDTO = {
         id,
         text,
+        token
       };
 
       await this.questionBusiness.createQuestion(question);

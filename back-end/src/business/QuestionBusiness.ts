@@ -1,16 +1,26 @@
 import { QuestionDatabase } from "../data/QuestionDatabase";
 import { CustomError } from "../error/CustomError";
 import { Question } from "../model/Question";
+import { Authenticator } from "../services/Authenticator";
 import { QuestionDTO } from "../types/DTO/QuestionDTO";
 import { UpdateQuestionInputDTO } from "../types/DTO/UpdateQuestionInputDTO";
 
 export class QuestionBusiness {
-  constructor(private questionDatabase: QuestionDatabase) {}
+  constructor(private questionDatabase: QuestionDatabase, private authenticator: Authenticator) {}
 
   public createQuestion = async (question: QuestionDTO): Promise<void> => {
     try {
-      const { text } = question;
+      const { text, token } = question;
 
+      if (!token) {
+        throw new CustomError(401, "Usuário não identificado.");
+      }
+
+      const tokenData = this.authenticator.getTokenData(token);
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
+      
       if (!text) {
         throw new CustomError(422, "Por favor, digite uma pergunta.");
       }
