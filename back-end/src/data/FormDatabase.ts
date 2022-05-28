@@ -27,8 +27,11 @@ export class FormDatabase extends BaseDatabase {
 
   public getFormById = async (id: string): Promise<Form[] | undefined> => {
     try {
-      const [foundForm] = await this.connection(this.TABLE_NAME).where("form_id", id);
-      
+      const [foundForm] = await this.connection(this.TABLE_NAME).where(
+        "form_id",
+        id
+      );
+
       return foundForm;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
@@ -43,6 +46,14 @@ export class FormDatabase extends BaseDatabase {
       );
 
       return foundForm;
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+
+  public deleteForm = async (id: string): Promise<void> => {
+    try {
+      await this.connection(this.TABLE_NAME).where("form_id", id).del();
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }

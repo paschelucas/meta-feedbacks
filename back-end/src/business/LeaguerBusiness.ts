@@ -6,7 +6,6 @@ import { CustomError } from "../error/CustomError";
 import Leaguer, { FaseRole } from "../model/Leaguer";
 import UserDatabase from "../data/UserDatabase";
 import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
-import { LeaguerResponse } from "../types/leaguerResponse";
 
 export default class LeaguerBusiness {
   constructor(

@@ -38,4 +38,18 @@ export class FormController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public deleteForm = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const {id} = req.params;
+
+      await this.formBusiness.deleteForm(id);
+
+      res.status(200).send({message: "Formulário excluído com sucesso."})
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+
+    }
+  }
 }
