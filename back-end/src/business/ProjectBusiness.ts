@@ -1,4 +1,5 @@
 import { ProjectDatabase } from "../data/ProjectDatabase";
+import { ProjectsAndItsLeaguersDatabase } from "../data/ProjectsAndItsLeaguersDatabase";
 import { CustomError } from "../error/CustomError";
 import { Project } from "../model/Project";
 import { Authenticator } from "../services/Authenticator";
@@ -7,6 +8,7 @@ import { ProjectDTO } from "../types/DTO/ProjectDTO";
 export class ProjectBusiness {
   constructor(
     private projectDatabase: ProjectDatabase,
+    private projectsAndItsLeaguersDatabase: ProjectsAndItsLeaguersDatabase,
     private authenticator: Authenticator
   ) {}
 
@@ -112,6 +114,16 @@ export class ProjectBusiness {
       if (!foundProject) {
         throw new CustomError(404, "Projeto não encontrado.");
       }
+
+      const selectedProjectLeaguers =
+      await this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(id)
+
+    for (let leaguer of selectedProjectLeaguers) {
+      await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(
+        id,
+        leaguer.leaguer_id
+      );
+    }
 
       await this.projectDatabase.deleteProject(id);
     } catch (error: any) {
