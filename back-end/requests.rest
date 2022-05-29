@@ -122,3 +122,17 @@ Content-Type: application/json
     "password":"Teste312345",
     "new_password":"Teste31234"
 }
+
+###
+
+PUT http://localhost:3003/leaguers/edit
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2ItNGRmOC04Mzg1LTI3ZmNhODhjMTBlZCIsInJvbGUiOiJnZXN0b3IiLCJpYXQiOjE2NTM3ODk2MTYsImV4cCI6MTY1Mzc5NjgxNn0.bmSsg5S2TaksK3fSHLslyJZXRyZwWmneByVYXcnI13M
+
+{
+    "id": "2516189c-c4af-4b7f-8259-d6f215720310",
+    "name": "Teste3",
+    "turma": "turma-2",
+    "fase": "beta",
+    "responsavel": "Teste"
+}
