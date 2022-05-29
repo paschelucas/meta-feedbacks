@@ -46,7 +46,7 @@ export class FormsAndItsQuestionsController {
       await this.formAndItsQuestionsBusiness.removeQuestionFromAForm(formId, questionId);
 
       res
-        .status(201)
+        .status(200)
         .send({ message: "Pergunta removida do formulário com sucesso." });
     } catch (error: any) {
       const { statusCode, message } = error;
@@ -61,7 +61,7 @@ export class FormsAndItsQuestionsController {
       const questions = await this.formAndItsQuestionsBusiness.getQuestionsByFormId(formId);
 
       res
-        .status(201)
+        .status(200)
         .send({ questions: questions });
     } catch (error: any) {
       const { statusCode, message } = error;

@@ -15,5 +15,5 @@ const questionController = new QuestionController(
 
 questionRouter.post("/create", questionController.createQuestion)
 questionRouter.get("/", questionController.getAllQuestions)
-questionRouter.put("/:id/update", questionController.updateQuestion)
+questionRouter.patch("/:id/update", questionController.updateQuestion)
 questionRouter.delete("/:id", questionController.deleteQuestion)

@@ -51,7 +51,7 @@ export class FormsAndItsQuestionsDatabase extends BaseDatabase {
     questionId: string
   ): Promise<FormAndItsQuestions[] | undefined> => {
     try {
-      const [foundQuestion] = await await this.connection(this.TABLE_NAME)
+      const [foundQuestion] = await this.connection(this.TABLE_NAME)
         .where("form_id", formId)
         .andWhere("question_id", questionId);
 

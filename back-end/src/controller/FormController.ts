@@ -16,11 +16,10 @@ export class FormController {
       const formId = this.idGenerator.generateId();
       const token = req.headers.authorization as string;
 
-
       const formInput: FormDTO = {
         formId,
         formName,
-        token
+        token,
       };
 
       await this.formBusiness.createForm(formInput);
@@ -36,7 +35,7 @@ export class FormController {
     try {
       const forms = await this.formBusiness.getAllForms();
 
-      res.status(200).send({forms: forms})
+      res.status(200).send({ forms: forms });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
@@ -45,21 +44,19 @@ export class FormController {
 
   public deleteForm = async (req: Request, res: Response): Promise<void> => {
     try {
-      const {id} = req.params;
+      const { id } = req.params;
       const token = req.headers.authorization as string;
       const deleteFormInput: DeleteFormDTO = {
         id,
-        token
+        token,
       };
-
 
       await this.formBusiness.deleteForm(deleteFormInput);
 
-      res.status(200).send({message: "Formulário excluído com sucesso."})
+      res.status(200).send({ message: "Formulário excluído com sucesso." });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
-
     }
-  }
+  };
 }
