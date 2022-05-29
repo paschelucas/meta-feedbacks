@@ -59,6 +59,14 @@ CREATE TABLE projects(
   project_id VARCHAR(255) PRIMARY KEY NOT NULL,
   project_name VARCHAR(255) UNIQUE NOT NULL
 );
+
+CREATE TABLE projects_and_its_leaguers(
+  bond_id VARCHAR(255) NOT NULL PRIMARY KEY,
+  project_id VARCHAR(255) NOT NULL,
+  leaguer_id VARCHAR(255) NOT NULL,
+  FOREIGN KEY (project_id) REFERENCES projects (project_id),
+  FOREIGN KEY (leaguer_id) REFERENCES leaguers (leaguer_id)
+);
 `
       )
       .then(() => {
