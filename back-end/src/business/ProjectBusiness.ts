@@ -52,4 +52,39 @@ export class ProjectBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  public updateProject = async (project: ProjectDTO): Promise<void> => {
+      try {
+        const { id, name, token } = project;
+        if (!token) {
+            throw new CustomError(401, "Usuário não identificado.");
+          }
+    
+          const tokenData = this.authenticator.getTokenData(token);
+          if (tokenData.role !== "admin") {
+            throw new CustomError(403, "Usuário não autorizado.");
+          }
+
+          if (!name) {
+            throw new CustomError(
+              422,
+              "Por favor, escolha um novo nome para o projeto."
+            );
+          }
+    
+          const foundProjectName = await this.projectDatabase.getProjectByName(name); 
+          if (foundProjectName) {
+            throw new CustomError(422, "Já existe um projeto com este nome.");
+          }
+
+          const foundProject = await this.projectDatabase.getProjectById(id)
+          if (!foundProject) {
+              throw new CustomError(404, "Projeto não encontrado.")
+          }
+await this.projectDatabase.updateProject(project)
+      } catch (error: any) {
+        throw new CustomError(error.statusCode, error.message);
+ 
+      }
+  }
 }

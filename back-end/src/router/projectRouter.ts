@@ -18,3 +18,4 @@ const projectController = new ProjectController(
 
 projectRouter.post("/create", projectController.createProject);
 projectRouter.get("/", projectController.getAllProjects);
+projectRouter.patch("/:id/update", projectController.updateProject);
