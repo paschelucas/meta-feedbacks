@@ -7,7 +7,6 @@ import Leaguer from "../model/Leaguer";
 import UserDatabase from "../data/UserDatabase";
 import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
 import { EditLeaguerInputDTO } from "../types/DTO/EditLeaguerInputDTO";
-import { LeaguerResponse } from "../types/leaguerResponse";
 
 export default class LeaguerBusiness {
   constructor(
