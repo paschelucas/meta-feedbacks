@@ -1,8 +1,8 @@
 import { BaseDatabase } from "./BaseDatabase";
-import Leaguer, { FaseRole } from "../model/Leaguer";
-import { FindUserResponse } from "../types/findUserResponse";
+import Leaguer from "../model/Leaguer";
 import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
 import { LeaguerResponse } from "../types/leaguerResponse";
+import { EditLeaguerInputDTO } from "../types/DTO/EditLeaguerInputDTO";
 
 export default class LeaguerDatabase extends BaseDatabase {
   protected TABLE_NAME = "leaguers";
@@ -15,9 +15,9 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  public getAllLeaguers = async () => {
+  public getAllLeaguers = async (): Promise <LeaguerResponse | undefined> => {
     try {
-      const queryResult: FindUserResponse = await this.connection(
+      const queryResult: LeaguerResponse = await this.connection(
         this.TABLE_NAME
       ).select("*");
       return queryResult;
@@ -26,9 +26,9 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  public findByUserId = async (id: string) => {
+  public findByUserId = async (id: string): Promise <LeaguerResponse | undefined> => {
     try {
-      const queryResult: FindUserResponse = await this.connection(
+      const queryResult: LeaguerResponse = await this.connection(
         this.TABLE_NAME
       )
         .select("*")
@@ -52,17 +52,37 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  editLeaguerFase = async (input: EditFaseInputDTO) => {
+  editLeaguerFase = async (input: EditFaseInputDTO): Promise <Leaguer | undefined> => {
     try {
       const result = await this.connection(this.TABLE_NAME)
       .update({leaguer_fase: input.newFase})
       .where({leaguer_id: input.leaguerId})
 
-      const alteredLeaguer: LeaguerResponse = await this.connection(this.TABLE_NAME)
+      const [alteredLeaguer] = await this.connection(this.TABLE_NAME)
       .select("*")
       .where({leaguer_id: input.leaguerId})
 
-      return alteredLeaguer[0]
+      return alteredLeaguer
+
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  };
+
+  editLeaguer = async (input: EditLeaguerInputDTO): Promise <Leaguer | undefined> => {
+    try {
+      const result = await this.connection(this.TABLE_NAME)
+      .update({leaguer_name: input.name,
+      leaguer_turma: input.turma,
+      leaguer_fase: input.fase,
+      leaguer_responsavel: input.responsavel})
+      .where({leaguer_id: input.id})
+
+      const [alteredLeaguer] = await this.connection(this.TABLE_NAME)
+      .select("*")
+      .where({leaguer_id: input.id})
+
+      return alteredLeaguer;
 
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import LeaguerBusiness from "../business/LeaguerBusiness";
-import { FaseRole } from "../model/Leaguer";
 import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
 import { LeaguerInputDTO } from "../types/DTO/LeaguerInputDTO";
+import { EditLeaguerInputDTO } from "../types/DTO/EditLeaguerInputDTO";
 
 export default class LeaguerController {
   constructor(private leaguerBusiness: LeaguerBusiness) {}
@@ -78,5 +78,28 @@ export default class LeaguerController {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
     }
-  }
+  };
+
+  public editLeaguer = async (req: Request, res: Response) => {
+    const { id, name, turma, fase, responsavel } = req.body;
+    const token = req.headers.authorization as string;
+
+    const input: EditLeaguerInputDTO = {
+      id,
+      name,
+      turma,
+      fase,
+      responsavel
+    };
+
+    try {
+      const leaguer = await this.leaguerBusiness.editLeaguer(input, token);
+      res
+        .status(201)
+        .send({ message: "Leaguer atualizado com sucesso.", leaguer });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
 }

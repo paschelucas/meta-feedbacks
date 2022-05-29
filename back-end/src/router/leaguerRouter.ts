@@ -23,3 +23,5 @@ leaguerRouter.get("/byresponsible", leaguerController.getLeaguersByUserId);
 leaguerRouter.post("/create", leaguerController.createLeaguer);
 
 leaguerRouter.put("/editfase", leaguerController.editLeaguerFase);
+
+leaguerRouter.put("/edit", leaguerController.editLeaguer);
