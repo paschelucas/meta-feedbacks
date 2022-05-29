@@ -135,7 +135,7 @@ export default class LeaguerBusiness {
   editLeaguer = async (
     input: EditLeaguerInputDTO,
     token: string
-  ) => {
+  ): Promise <Leaguer | undefined> => {
     try {
       const { id, name, turma, fase, responsavel } = input;
 

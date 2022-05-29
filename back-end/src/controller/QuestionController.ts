@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { QuestionBusiness } from "../business/QuestionBusiness";
 import { IdGenerator } from "../services/generateId";
+import { DeleteFormDTO } from "../types/DTO/DeleteFormDTO";
+import { DeleteQuestionDTO } from "../types/DTO/DeleteQuestionDTO";
 import { QuestionDTO } from "../types/DTO/QuestionDTO";
 import { UpdateQuestionInputDTO } from "../types/DTO/UpdateQuestionInputDTO";
 
@@ -17,10 +19,12 @@ export class QuestionController {
     try {
       const { text } = req.body;
       const id = this.idGenerator.generateId();
+      const token = req.headers.authorization as string;
 
       const question: QuestionDTO = {
         id,
         text,
+        token
       };
 
       await this.questionBusiness.createQuestion(question);
@@ -53,10 +57,12 @@ export class QuestionController {
     try {
       const id = req.params.id;
       const { newText } = req.body;
+      const token = req.headers.authorization as string;
 
       const updateQuestionInput: UpdateQuestionInputDTO = {
         id,
         newText,
+        token
       };
 
       await this.questionBusiness.updateQuestion(updateQuestionInput);
@@ -74,7 +80,13 @@ export class QuestionController {
   ): Promise<void> => {
     try {
       const id = req.params.id;
-      await this.questionBusiness.deleteQuestion(id);
+      const token = req.headers.authorization as string;
+
+      const deleteQuestionInput: DeleteQuestionDTO = {
+        id, token
+      }
+      await this.questionBusiness.deleteQuestion(deleteQuestionInput);
+
 
       res.status(200).send({ message: "Pergunta excluída com sucesso." });
     } catch (error: any) {
