@@ -21,7 +21,7 @@ export default class UserBusiness {
     try {
       const { name, email, password, role } = input;
       const newRole = User.stringToUserRole(role);
-      const tokenData = await this.authenticator.getTokenData(adminToken);
+      const tokenData = this.authenticator.getTokenData(adminToken);
 
       if (!tokenData) {
         throw new CustomError(422, "Token inválido ou não passado.");

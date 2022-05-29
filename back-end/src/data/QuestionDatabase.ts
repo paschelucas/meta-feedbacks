@@ -63,7 +63,7 @@ export class QuestionDatabase extends BaseDatabase {
     }
   };
   
-  public getQuestionById = async (id: string): Promise<Question[]> => {
+  public getQuestionById = async (id: string): Promise<Question[] | undefined> => {
     try {
       const [question] = await this.connection(this.TABLE_NAME).where("question_id", id);
 
