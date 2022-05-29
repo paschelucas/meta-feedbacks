@@ -53,4 +53,20 @@ export class ProjectsAndItsLeaguersController {
           res.status(statusCode || 400).send({ message });
         }
       };
+
+      public getLeaguersByProjectId = async (req: Request, res: Response): Promise<void> => {
+        try {
+          const { projectId } = req.params;
+    
+          const leaguers = await this.projectsAndItsLeaguersBusiness.getLeaguersByProjectId(projectId)
+    
+          res
+            .status(200)
+            .send({ leaguers: leaguers });
+        } catch (error: any) {
+          const { statusCode, message } = error;
+          res.status(statusCode || 400).send({ message });
+    
+        }
+      }
 }

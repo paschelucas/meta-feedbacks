@@ -88,4 +88,19 @@ export class ProjectsAndItsLeaguersBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  public getLeaguersByProjectId = async (projectId: string): Promise<any> => {
+    try {
+      if (!projectId) {
+        throw new CustomError(422, "Por favor, escolha um projeto.");
+      }
+
+      const leaguers =
+        await this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(projectId)
+
+      return leaguers;
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
 }

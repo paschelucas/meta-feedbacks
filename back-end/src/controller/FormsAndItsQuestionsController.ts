@@ -61,7 +61,7 @@ export class FormsAndItsQuestionsController {
       const questions = await this.formAndItsQuestionsBusiness.getQuestionsByFormId(formId);
 
       res
-        .status(201)
+        .status(200)
         .send({ questions: questions });
     } catch (error: any) {
       const { statusCode, message } = error;
