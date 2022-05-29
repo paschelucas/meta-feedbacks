@@ -22,7 +22,7 @@ export default class LeaguerController {
       const leaguer = await this.leaguerBusiness.createLeaguer(input, token);
       res
         .status(201)
-        .send({ message: "Leaguer cadastrado com sucesso.", leaguer });
+        .send({ message: "Leaguer cadastrado com sucesso.", leaguer: leaguer });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
@@ -36,7 +36,7 @@ export default class LeaguerController {
       const allLeaguers = await this.leaguerBusiness.getAllLeaguers(token)
       res
       .status(200)
-      .send(allLeaguers)
+      .send({leaguers: allLeaguers})
 
     } catch (error: any) {
       const { statusCode, message } = error;
@@ -51,7 +51,7 @@ export default class LeaguerController {
       const leaguers = await this.leaguerBusiness.getLeaguerByUserId(token);
       res
       .status(200)
-      .send(leaguers)
+      .send({leaguers: leaguers})
 
     } catch (error: any) {
       const { statusCode, message } = error;
@@ -72,7 +72,7 @@ export default class LeaguerController {
       const leaguer = await this.leaguerBusiness.editLeaguerFase(token,input);
       res
         .status(201)
-        .send({ message: "Fase do leaguer alterada com sucesso.", leaguer });
+        .send({ message: "Fase do leaguer alterada com sucesso.", leaguer: leaguer });
 
     } catch (error: any) {
       const { statusCode, message } = error;
@@ -96,7 +96,7 @@ export default class LeaguerController {
       const leaguer = await this.leaguerBusiness.editLeaguer(input, token);
       res
         .status(201)
-        .send({ message: "Leaguer atualizado com sucesso.", leaguer });
+        .send({ message: "Leaguer atualizado com sucesso.", leaguer: leaguer });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });

@@ -68,7 +68,7 @@ export default class UserDatabase extends BaseDatabase {
       .where({user_name: input.userName})
 
       const alteredUser: FindUserResponse = await this.connection(this.TABLE_NAME)
-      .select("*")
+      .select("user_id", "user_name", "user_email", "user_role")
       .where({user_name: input.userName})
 
       return alteredUser[0]
