@@ -56,9 +56,9 @@ export class ProjectController {
         token,
       };
 
-      await this.projectBusiness.updateProject(projectInput);
+      await this.projectBusiness.deleteProject(projectInput);
 
-      res.status(201).send({ message: "Projeto alterado com sucesso." });
+      res.status(201).send({ message: "Projeto excluído com sucesso." });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
