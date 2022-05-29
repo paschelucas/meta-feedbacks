@@ -34,4 +34,23 @@ export class ProjectsAndItsLeaguersController {
           res.status(statusCode || 400).send({ message });
         }
       };
+
+      public removeLeaguerFromAProject = async (
+        req: Request,
+        res: Response
+      ): Promise<void> => {
+        try {
+          const { projectId } = req.params;
+          const { leaguerId } = req.body;
+    
+          await this.projectsAndItsLeaguersBusiness.removeLeaguerFromAProject(projectId, leaguerId)
+    
+          res
+            .status(200)
+            .send({ message: "Leaguer removido do projeto com sucesso." });
+        } catch (error: any) {
+          const { statusCode, message } = error;
+          res.status(statusCode || 400).send({ message });
+        }
+      };
 }

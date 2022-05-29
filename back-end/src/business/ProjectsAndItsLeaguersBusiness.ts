@@ -60,4 +60,32 @@ export class ProjectsAndItsLeaguersBusiness {
       throw new CustomError(error.statusCode, error.message);
     }
   };
+
+  public removeLeaguerFromAProject = async (
+    projectId: string,
+    leaguerId: string
+  ) => {
+    try {
+
+      if (!projectId || !leaguerId) {
+        throw new CustomError(422, "Por favor, preencha todos os campos.");
+      }
+
+      const foundProject = await this.projectDatabase.getProjectById(projectId)
+      if (!foundProject) {
+        throw new CustomError(404, "Formulário não encontrado.");
+      }
+
+      const foundLeaguer = await this.leaguerDatabase.findLeaguerById(
+        leaguerId
+      );
+      if (!foundLeaguer) {
+        throw new CustomError(404, "Leaguer não encontrado.");
+      }
+
+      await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(projectId, leaguerId)
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
 }

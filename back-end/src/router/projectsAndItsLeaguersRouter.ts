@@ -13,3 +13,4 @@ const projectsAndItsLeaguersBusiness = new ProjectsAndItsLeaguersBusiness(new Pr
 const projectsAndItsLeaguersController = new ProjectsAndItsLeaguersController(projectsAndItsLeaguersBusiness, new IdGenerator());
 
 projectsAndItsLeaguersRouter.post("/:projectId/insert", projectsAndItsLeaguersController.insertLeaguerInAProject);
+projectsAndItsLeaguersRouter.delete("/:projectId/remove", projectsAndItsLeaguersController.removeLeaguerFromAProject);
