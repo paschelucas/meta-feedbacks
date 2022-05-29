@@ -18,8 +18,22 @@ export class FormDatabase extends BaseDatabase {
   public getAllForms = async (): Promise<Form[]> => {
     try {
       const forms = await this.connection(this.TABLE_NAME);
+      const formsArray = new Array();
 
-      return forms;
+      for (let form of forms) {
+        const questions = await this.connection("forms_and_its_questions")
+        .join("questions", "questions.question_id", "forms_and_its_questions.question_id")
+        .where("forms_and_its_questions.form_id", form.form_id)
+        .select("questions.question_id", "questions.question_text");
+
+        form = {
+          ...form,
+          questions
+        }
+        formsArray.push(form)
+      }
+
+      return formsArray;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
