@@ -28,7 +28,6 @@ export default class LeaguerBusiness {
       }
 
       const tokenData = this.authenticator.getTokenData(token);
-
       if (!tokenData) {
         throw new CustomError(422, "Token inválido ou não passado.");
       }
@@ -48,7 +47,6 @@ export default class LeaguerBusiness {
         Leaguer.stringToFaseRole(fase),
         user.user_id
       );
-
       await this.leaguerDatabase.insert(newLeaguer);
 
       return newLeaguer;
