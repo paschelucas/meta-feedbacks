@@ -136,6 +136,7 @@ and (max-width : 800px) {
 `
 export const Button = styled.button`
     width:16.5vw;
+    height: 4rem;
     border-radius:3px;
     color:#ffff;
     background-color:#122870;
@@ -143,6 +144,7 @@ export const Button = styled.button`
     border-radius:3px;
     border:transparent;
     padding: 8px;
+    font-size: 1.5rem;
 
 
 :hover{

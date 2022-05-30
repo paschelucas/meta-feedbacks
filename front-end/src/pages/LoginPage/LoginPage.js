@@ -6,11 +6,12 @@ import background from '../../assets/img/background.png'
 import logo from '../../assets/img/logo.png'
 import logofeedbacks from '../../assets/img/logofeedbacks.png'
 import useProtectedPage from '../../hooks/useProtectedPage'
+import { CircularProgress } from "@mui/material";
 
 const LoginPage = () => {
   useProtectedPage();
   const {register, handleSubmit, formState: {errors}} = useForm();
-  const {login, isLoading, errorMessage} = useContext(GlobalContext);
+  const {login, isLoading} = useContext(GlobalContext);
 
   return (
     <div>
@@ -22,10 +23,10 @@ const LoginPage = () => {
       <Span>Faça o seu login.</Span>
       <form onSubmit={handleSubmit(login)}>
         <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
-        {errors ? <p>{errorMessage}</p> : <></>}
-        <Input {...register("password", {required: true})} type="password" placeholder="digite sua senha"/>
+        {errors ? <p>{errors.email?.message}</p> : <></>}
+        <Input {...register("password", {required: "Senha incorreta"})} type="password" placeholder="digite sua senha"/>
         {errors ? <p>{errors.password?.message}</p> : <></>}
-        <Button type="submit">ENTRAR</Button>
+        <Button type="submit">{isLoading ? <CircularProgress sx={'color: white; width: 2px'}/> : 'ENTRAR'}</Button>
       </form>
      </ContainerLogin>
     </div>
