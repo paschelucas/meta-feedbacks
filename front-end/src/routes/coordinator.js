@@ -25,3 +25,11 @@ export const goToLeaguersList = (Navigate) => {
 export const goToLeaguersSignup = (Navigate) => {
   Navigate("/leaguers/cadastro")
 };
+
+export const goToUserOptions = (Navigate) => {
+  Navigate("/user_options")
+};
+
+export const goToEvaluationProcess = (Navigate) => {
+  Navigate("/evolucao_processo")
+};
