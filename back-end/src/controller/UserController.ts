@@ -32,9 +32,14 @@ export default class UserController {
         html: `
         <div>
         <h3>Você foi cadastrade no sistema Meta League Feedbacks. Aqui estão seus dados:</h3> 
+        <ul>
         <li>
         <p>Email: ${email}</p>
-        <p>Senha> ${password}</p>
+        </li>
+        <li>
+        <p>Senha: ${password}</p>
+        </li>
+        </ul>
         </div>`,
       });
       res
