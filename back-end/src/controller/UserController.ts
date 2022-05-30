@@ -24,7 +24,7 @@ export default class UserController {
     };
     try {
       const auth = await this.userBusiness.signUp(input, token);
-      const message = await this.mailTransporter.transporter.sendMail({
+       await this.mailTransporter.transporter.sendMail({
         from: `${process.env.NODEMAILER_USER}`,
         to: "deborahdlmb@gmail.com",
         subject: "Cadastro realizado.",
