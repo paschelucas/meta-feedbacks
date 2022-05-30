@@ -23,7 +23,6 @@ const Router = () => {
         <Route path="/colaboradores" element={<ColaboratorsListPage/>}/>
         <Route path="/menu" element={<MenuPage/>} />
         <Route path="/leaguers" element={<LeaguersListPage/>}/>
-        <Route path="/user_options" element={<UserOptions/>}/>
         {/* Perguntar pro Brito */}
         <Route path="/evolucao_processo" element={<EvaluationProcess/>}/>
         <Route path="/*" element={<ErrorPage/>} />

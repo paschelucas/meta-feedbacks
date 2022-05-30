@@ -22,7 +22,7 @@ const GlobalState = (props) => {
     const userRole = localStorage.getItem('role');
     const userName = localStorage.getItem('name');
 
-    // functions
+    // user related functions
     const login = async (data) => {
         const res = await makeRequest('post', `${base_URL}user/login`, data);
 
@@ -52,6 +52,7 @@ const GlobalState = (props) => {
         const res = await makeRequest('post', `${base_URL}user/signup`, data, header);
 
         if (res.auth) {
+            setMessage(res.message);
             goToMenu(navigate)
         }
 
@@ -60,7 +61,32 @@ const GlobalState = (props) => {
             setErrorMessage(res);
         }  
     };
+    
+    const getUsers = async () => {
+        const res = await makeRequest('get', `${base_URL}user`, header);
+        
+        setUsers(res);
+    };  
 
+    const editUserRole = async (data, userName) => {
+        
+        const {newRole} = data;
+        
+        const body = {
+            userName,
+            newRole
+        };
+        
+        console.log(body);
+
+        // const res = await makeRequest('put', `${base_URL}user/role`, body, header);
+
+        // console.log(res)
+
+    };
+
+
+    // Leaguers related functions
     const leaguersSignup = async (data) => {
         const res = await makeRequest('post', `${base_URL}leaguers/create`, data, header);
         
@@ -72,7 +98,7 @@ const GlobalState = (props) => {
         else {
             setErrorMessage(res);
         }
-    }
+    };
 
     const getLeaguers = async () => {
         const res = await makeRequest('get', `${base_URL}leaguers`, header);
@@ -80,16 +106,11 @@ const GlobalState = (props) => {
         setLeaguers(res);
     };
 
-    const getUsers = async () => {
-        const res = await makeRequest('get', `${base_URL}user`, header);
-
-        setUsers(res);
-    };  
-
     const value = { 
         isLoading, 
         userRole, 
-        userName, 
+        userName,
+        message, 
         errorMessage, 
         login, 
         logout, 
@@ -98,9 +119,10 @@ const GlobalState = (props) => {
         getLeaguers, 
         getUsers,
         leaguers,
-        users 
+        users,
+        editUserRole
     };
-
+    
     return (
         <GlobalContext.Provider value={value}>
             {props.children}
