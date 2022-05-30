@@ -20,7 +20,7 @@ CREATE TABLE users(
 CREATE TABLE leaguers(
   leaguer_id VARCHAR(255) PRIMARY KEY NOT NULL,
   leaguer_name VARCHAR(255) UNIQUE NOT NULL,
-  leaguer_turma ENUM ('turma-piloto', 'turma-1', 'turma-2', 'turma-3') UNIQUE NOT NULL,
+  leaguer_turma ENUM ('turma-piloto', 'turma-1', 'turma-2', 'turma-3') NOT NULL,
   leaguer_fase ENUM ('introducao', 'labs', 'beta') NOT NULL,
   leaguer_responsavel VARCHAR(255),
   FOREIGN KEY (leaguer_responsavel) REFERENCES users (user_id)
