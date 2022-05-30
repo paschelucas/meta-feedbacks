@@ -8,6 +8,7 @@ import MenuPage from "../Pages/MenuPage/MenuPage";
 import LeaguersListPage from '../Pages/LeaguersListPage/LeaguersListPage'
 import LeaguersSignupPage from '../Pages/LeaguersSignupPage/LeaguersSignupPage';
 import ColaboratorsListPage from '../Pages/ColaboratorsListPage/ColaboratorsListPage';
+import EvaluationProcess from "../Pages/EvaluationProcess/EvaluationProcess";
 
 const Router = () => {
   return (
@@ -21,7 +22,12 @@ const Router = () => {
         <Route path="/leaguers/cadastro" element={<LeaguersSignupPage/>}/>
         <Route path="/colaboradores" element={<ColaboratorsListPage/>}/>
         <Route path="/menu" element={<MenuPage/>} />
+        <Route path="/leaguers" element={<LeaguersListPage/>}/>
+        <Route path="/user_options" element={<UserOptions/>}/>
+        {/* Perguntar pro Brito */}
+        <Route path="/evolucao_processo" element={<EvaluationProcess/>}/>
         <Route path="/*" element={<ErrorPage/>} />
+        
       </Routes>
       </GlobalState>
     </BrowserRouter>

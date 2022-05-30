@@ -9,6 +9,7 @@ export default class LeaguerDatabase extends BaseDatabase {
 
   public insert = async (leaguer: Leaguer): Promise<void> => {
     try {
+      console.log(leaguer)
       await this.connection(this.TABLE_NAME).insert(leaguer);
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);

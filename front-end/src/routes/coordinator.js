@@ -29,3 +29,7 @@ export const goToLeaguersSignup = (Navigate) => {
 export const goToColaboratorsList = (Navigate) => {
   Navigate("/colaboradores")
 };
+
+export const goToEvaluationProcess = (Navigate) => {
+  Navigate("/evolucao_processo")
+};
