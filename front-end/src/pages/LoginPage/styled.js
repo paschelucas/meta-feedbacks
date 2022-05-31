@@ -39,7 +39,7 @@ export const ImgLogo = styled.img`
     display:flex;
     width:50%;
     height:10vh;
-
+    
     @media screen and (min-width : 320px) and
     (max-width : 480px) {
     // ** mobile    
@@ -51,9 +51,11 @@ export const ImgLogo = styled.img`
 `
 export const H3 = styled.h3`
     font-family: 'Open Sans', sans-serif;
+    padding:20px;
+    font-weight:bold;
 `
 export const Span = styled.span`
-    margin-top:-20px;
+    margin-top:-10px;
     font-family: 'Open Sans', sans-serif;
 `
 export const ContainerLogin = styled.div`
@@ -110,8 +112,9 @@ export const Input = styled.input`
     width:15vw;
     border-radius:3px;
     border-color:#636B6F;
-    padding: 8px;
+    padding: 10px;
     margin: 10px 0px;
+    
 
     @media screen and (min-width : 320px) and
     (max-width : 480px) {
