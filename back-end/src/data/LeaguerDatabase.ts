@@ -16,7 +16,7 @@ export default class LeaguerDatabase extends BaseDatabase {
     }
   };
 
-  public getAllLeaguers = async (): Promise <LeaguerResponse | undefined> => {
+  public getAllLeaguers = async (): Promise <LeaguerResponse> => {
     try {
       const queryResult: LeaguerResponse = await this.connection(
         this.TABLE_NAME

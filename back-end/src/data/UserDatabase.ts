@@ -37,7 +37,7 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  getUserById = async (id: string): Promise<User | undefined> => {
+  getUserById = async (id: string) => {
     try {
       const [queryResult] = await this.connection(this.TABLE_NAME)
         .select("*")
