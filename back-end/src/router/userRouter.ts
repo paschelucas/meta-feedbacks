@@ -5,6 +5,7 @@ import UserDatabase from "../data/UserDatabase";
 import { IdGenerator } from "../services/generateId";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
+import { MailTransporter } from "../services/MailTransporter";
 
 export const userRouter = express.Router();
 
@@ -14,9 +15,10 @@ const userBusiness = new UserBusiness(
     new Authenticator(),
     new HashManager()
 )
-const userController = new UserController(userBusiness);
+const userController = new UserController(userBusiness, new MailTransporter());
 
 userRouter.get("", userController.getAllUsers)
 userRouter.post("/signup", userController.signUp)
 userRouter.post("/login", userController.login)
 userRouter.put("/role", userController.editUserRole)
+userRouter.put("/password", userController.editPassword)

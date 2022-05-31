@@ -16,8 +16,12 @@ const leaguerBusiness = new LeaguerBusiness(
     
 const leaguerController = new LeaguerController(leaguerBusiness);
 
-leaguerRouter.post("/create", leaguerController.createLeaguer);
-
 leaguerRouter.get("", leaguerController.getAllLeaguers);
 
 leaguerRouter.get("/byresponsible", leaguerController.getLeaguersByUserId);
+
+leaguerRouter.post("/create", leaguerController.createLeaguer);
+
+leaguerRouter.put("/editfase", leaguerController.editLeaguerFase);
+
+leaguerRouter.put("/edit", leaguerController.editLeaguer);

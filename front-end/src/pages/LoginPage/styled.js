@@ -146,6 +146,7 @@ export const Button = styled.button`
     border-radius:3px;
     border:transparent;
     padding: 8px;
+    font-size: 1.5rem;
 
 
 :hover{
