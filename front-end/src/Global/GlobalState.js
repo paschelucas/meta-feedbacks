@@ -68,7 +68,7 @@ const GlobalState = (props) => {
         setUsers(res);
     };  
 
-    const editUserRole = async (data, userName) => {
+    const editUserRole = async (data, userName, close) => {
         
         const {newRole} = data;
         
@@ -77,12 +77,11 @@ const GlobalState = (props) => {
             newRole
         };
         
-        console.log(body);
+        const res = await makeRequest('put', `${base_URL}user/role`, body, header);
 
-        // const res = await makeRequest('put', `${base_URL}user/role`, body, header);
+        setMessage(res.message);
 
-        // console.log(res)
-
+        close();
     };
 
 
@@ -103,7 +102,7 @@ const GlobalState = (props) => {
     const getLeaguers = async () => {
         const res = await makeRequest('get', `${base_URL}leaguers`, header);
 
-        setLeaguers(res);
+        setLeaguers(res.leaguers);
     };
 
     const value = { 

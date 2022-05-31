@@ -24,7 +24,7 @@ const Router = () => {
         <Route path="/menu" element={<MenuPage/>} />
         <Route path="/leaguers" element={<LeaguersListPage/>}/>
         {/* Perguntar pro Brito */}
-        <Route path="/evolucao_processo" element={<EvaluationProcess/>}/>
+        <Route path="/avaliacao" element={<EvaluationProcess/>}/>
         <Route path="/*" element={<ErrorPage/>} />
         
       </Routes>
