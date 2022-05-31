@@ -138,7 +138,8 @@ and (max-width : 800px) {
 
 `
 export const Button = styled.button`
-    width:16.7vw;
+    width:16.5vw;
+    height: 4rem;
     border-radius:3px;
     color:#ffff;
     background-color:#122870;

@@ -7,6 +7,7 @@ import Leaguer from "../model/Leaguer";
 import UserDatabase from "../data/UserDatabase";
 import { EditFaseInputDTO } from "../types/DTO/EditFaseInputDTO";
 import { EditLeaguerInputDTO } from "../types/DTO/EditLeaguerInputDTO";
+import { LeaguerResponse } from "../types/leaguerResponse";
 
 export default class LeaguerBusiness {
   constructor(
@@ -64,9 +65,10 @@ export default class LeaguerBusiness {
         throw new Error("Token inválido ou não enviado.");
       }
 
+      const userId = tokenData.id;
+
       if (tokenData.role !== "admin" && tokenData.role !== "mentor") {
         try {
-          const userId = tokenData.id;
 
           const leaguers = await this.leaguerDatabase.findByUserId(userId);
 
@@ -76,9 +78,22 @@ export default class LeaguerBusiness {
         }
       }
 
-      const allLeaguers = await this.leaguerDatabase.getAllLeaguers();
+      const allLeaguers: LeaguerResponse = await this.leaguerDatabase.getAllLeaguers();
 
-      return allLeaguers;
+      const responsaveisNomes = []
+      
+      for(let leaguer of allLeaguers) {
+        const responsavel = await this.userDatabase.getUserById(leaguer.leaguer_responsavel);
+        leaguer = {
+          ...leaguer,
+          leaguer_responsavel: responsavel.user_name
+        }
+
+        responsaveisNomes.push(leaguer)
+        
+      }
+
+      return responsaveisNomes;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
