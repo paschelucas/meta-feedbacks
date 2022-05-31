@@ -20,12 +20,14 @@ export class AnswerDatabase extends BaseDatabase {
 
   public getAnswersByLeaguerId = async (id: string): Promise<Answer[]> => {
     try {
-      const answers = await this.connection(this.TABLE_NAME).where("leaguer_id", id);
+      const answers = await this.connection(this.TABLE_NAME).where(
+        "leaguer_id",
+        id
+      );
 
-      return answers
+      return answers;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
-      
     }
-  }
+  };
 }

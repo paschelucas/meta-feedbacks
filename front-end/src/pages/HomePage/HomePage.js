@@ -1,8 +1,10 @@
-import React from "react"; 
+import React, { useContext, useEffect, useState } from "react"; 
 import { useNavigate } from "react-router-dom";
 import { goToLogin } from "../../routes/coordinator";
+import { CircularProgress } from "@mui/material";
 
 const HomePage = () => {
+
   const navigate = useNavigate();
 
   setTimeout(()=>{
@@ -10,9 +12,10 @@ const HomePage = () => {
   }, 1250)
 
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <>
+     <img src="" alt="" />
+     <CircularProgress/> 
+    </>
   )
 }
 

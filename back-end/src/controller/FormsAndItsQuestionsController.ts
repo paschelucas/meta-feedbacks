@@ -3,7 +3,7 @@ import { FormsAndItsQuestionsBusiness } from "../business/FormsAndItsQuestionsBu
 import { IdGenerator } from "../services/generateId";
 import { InsertQuestionInAFormDTO } from "../types/DTO/InsertQuestionInAFormDTO";
 
-export class FormAndItsQuestionsController {
+export class FormsAndItsQuestionsController {
   constructor(
     private formAndItsQuestionsBusiness: FormsAndItsQuestionsBusiness,
     private idGenerator: IdGenerator
@@ -34,4 +34,39 @@ export class FormAndItsQuestionsController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public removeQuestionFromAForm = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { formId } = req.params;
+      const { questionId } = req.body;
+
+      await this.formAndItsQuestionsBusiness.removeQuestionFromAForm(formId, questionId);
+
+      res
+        .status(200)
+        .send({ message: "Pergunta removida do formulário com sucesso." });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
+
+  public getQuestionsByFormId = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { formId } = req.params;
+
+      const questions = await this.formAndItsQuestionsBusiness.getQuestionsByFormId(formId);
+
+      res
+        .status(200)
+        .send({ questions: questions });
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+
+    }
+  }
 }

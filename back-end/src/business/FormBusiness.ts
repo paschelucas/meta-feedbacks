@@ -1,14 +1,30 @@
 import { FormDatabase } from "../data/FormDatabase";
+import { FormsAndItsQuestionsDatabase } from "../data/FormsAndItsQuestionsDatabase";
 import { CustomError } from "../error/CustomError";
 import { Form } from "../model/Form";
+import { Authenticator } from "../services/Authenticator";
+import { DeleteFormDTO } from "../types/DTO/DeleteFormDTO";
 import { FormDTO } from "../types/DTO/FormDTO";
 
 export class FormBusiness {
-  constructor(private formDatabase: FormDatabase) {}
+  constructor(
+    private formDatabase: FormDatabase,
+    private formsAndItsQuestionsDatabase: FormsAndItsQuestionsDatabase,
+    private authenticator: Authenticator
+  ) {}
 
   public createForm = async (form: FormDTO) => {
     try {
-      const { formId, formName } = form;
+      const { formId, formName, token } = form;
+
+      if (!token) {
+        throw new CustomError(401, "Usuário não identificado.");
+      }
+
+      const tokenData = this.authenticator.getTokenData(token);
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
 
       if (!formName) {
         throw new CustomError(
@@ -33,10 +49,43 @@ export class FormBusiness {
     try {
       const forms = await this.formDatabase.getAllForms();
 
-      return forms
+      return forms;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
-
     }
-  }
+  };
+
+  public deleteForm = async (deleteFormInput: DeleteFormDTO): Promise<void> => {
+    try {
+      const { id, token } = deleteFormInput;
+      const foundForm = await this.formDatabase.getFormById(id);
+
+      if (!token) {
+        throw new CustomError(401, "Usuário não identificado.");
+      }
+
+      const tokenData = this.authenticator.getTokenData(token);
+      if (tokenData.role !== "admin") {
+        throw new CustomError(403, "Usuário não autorizado.");
+      }
+
+      if (!foundForm) {
+        throw new CustomError(422, "Formulário não encontrado.");
+      }
+
+      const selectedFormQuestions =
+        await this.formsAndItsQuestionsDatabase.getQuestionsByFormId(id);
+
+      for (let question of selectedFormQuestions) {
+        await this.formsAndItsQuestionsDatabase.removeQuestionFromAForm(
+          id,
+          question.question_id
+        );
+      }
+
+      await this.formDatabase.deleteForm(id);
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
 }

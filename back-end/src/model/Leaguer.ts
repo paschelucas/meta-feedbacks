@@ -40,7 +40,7 @@ export default class Leaguer {
             case 'turma-3':
               return TurmaRole.TURMA3;
             default:
-              throw new Error("Invalid user role");
+              throw new Error("Turma inválida.");
           }
     }
 
@@ -53,7 +53,7 @@ export default class Leaguer {
             case 'beta':
               return FaseRole.BETA
             default:
-              throw new Error("Invalid user role");
+              throw new Error("Fase inválida.");
           }
     }
     
