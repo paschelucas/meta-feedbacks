@@ -31,5 +31,5 @@ export const goToColaboratorsList = (Navigate) => {
 };
 
 export const goToEvaluationProcess = (Navigate) => {
-  Navigate("/evolucao_processo")
+  Navigate("/avaliacao")
 };

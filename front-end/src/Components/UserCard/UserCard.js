@@ -13,7 +13,8 @@ const UserCard = (props) => {
             <p>{props.name}</p>
             <p>{props.email}</p>
             <Popup trigger={<p style={{cursor: 'pointer'}}>{props.role}</p>} position="center">
-                <form onSubmit={handleSubmit((data)=> editUserRole(data, props.name))}>
+                {close => (
+                <form onSubmit={handleSubmit((data)=> editUserRole(data, props.name, close))}>
                     <select {...register('newRole')}>
                         <option value="">Selecione</option>
                         <option value="admin">Administrador</option>
@@ -22,6 +23,7 @@ const UserCard = (props) => {
                     </select>
                     <button type='submit'>mudar</button>
                 </form>
+                )}
             </Popup>
         </li>
     );
