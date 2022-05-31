@@ -11,6 +11,7 @@ const GlobalState = (props) => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [userRole, setUserRole] = useState('');
+    // const [leaguers, setLeaguers, loading] = useRequest([], `${base_URL}/leaguers/`)
 
     const login = async (data) => {
         const res = await makeRequest('post', `${base_URL}user/login`, data);
@@ -71,7 +72,7 @@ const GlobalState = (props) => {
         console.log(res);
     };
 
-    const value = { isLoading, errorMessage, login, logout, signup, leaguersSignup, getLeaguers };
+    const value = { isLoading, errorMessage, login, logout, signup, leaguersSignup, getLeaguers,  };
 
     return (
         <GlobalContext.Provider value={value}>

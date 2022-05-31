@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import GlobalContext from "../../Global/GlobalContext";
 import { BoxSignUp } from "./styled";
-import logo from "../../assets/img/logo.png"
+import logo from "../../assets/img/Logo.png"
 
 const SignUpPage = () => {
 
