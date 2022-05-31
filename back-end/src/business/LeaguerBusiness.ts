@@ -93,8 +93,6 @@ export default class LeaguerBusiness {
         
       }
 
-      // const result = {allLeaguers, responsaveisNomes}
-
       return responsaveisNomes;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
