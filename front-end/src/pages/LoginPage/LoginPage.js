@@ -7,6 +7,7 @@ import logo from '../../assets/img/logo.png'
 import logofeedbacks from '../../assets/img/logofeedbacks.png'
 import useProtectedPage from '../../hooks/useProtectedPage'
 
+
 const LoginPage = () => {
   useProtectedPage();
   const {register, handleSubmit, formState: {errors}} = useForm();
@@ -18,7 +19,7 @@ const LoginPage = () => {
       <Img src={background}/>
     <ContainerLogin>
       <ImgLogo src={logo}/>
-      <H3><strong>Bem vindo!</strong></H3>
+      <H3>Bem vindo!</H3>
       <Span>Faça o seu login.</Span>
       <form onSubmit={handleSubmit(login)}>
         <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
