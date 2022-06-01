@@ -20,6 +20,11 @@ export default class UserBusiness {
   signUp = async (input: UserInputDTO, adminToken: string): Promise<any> => {
     try {
       const { name, email, password, role } = input;
+      
+      if (role !== "admin" && role !== "mentor" && role !== "gestor") {
+        throw new CustomError(422, "Tipo de usuário inválido.");
+      }
+      
       const newRole = User.stringToUserRole(role);
       const tokenData = this.authenticator.getTokenData(adminToken);
 
