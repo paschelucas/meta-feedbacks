@@ -16,27 +16,35 @@ export class AnswerBusiness {
 
   public postAnswer = async (answer: AnswerDTO): Promise<void> => {
     try {
-      const { answerId, questionId, answerText, leaguerId, userId } = answer;
+      const {
+        answerId,
+        questionId,
+        answerText,
+        answerDate,
+        leaguerId,
+        userId,
+      } = answer;
 
       if (!answerText) {
         throw new CustomError(422, "Por favor, digite uma resposta.");
       }
 
-      const foundQuestion = await this.questionDatabase.getQuestionById(
-        questionId
+      const [foundQuestion, foundLeaguer, foundUser] = await Promise.allSettled(
+        [
+          this.questionDatabase.getQuestionById(questionId),
+          this.leaguerDatabase.findLeaguerById(leaguerId),
+          this.userDatabase.getUserById(userId),
+        ]
       );
+
       if (!foundQuestion) {
         throw new CustomError(404, "Pergunta não encontrada.");
       }
 
-      const foundLeaguer = await this.leaguerDatabase.findLeaguerById(
-        leaguerId
-      );
       if (!foundLeaguer) {
         throw new CustomError(404, "Leaguer não encontrado.");
       }
 
-      const foundUser = await this.userDatabase.getUserById(userId);
       if (!foundUser) {
         throw new CustomError(404, "Usuário não encontrado.");
       }
@@ -45,9 +53,12 @@ export class AnswerBusiness {
         answerId,
         questionId,
         answerText,
+        answerDate,
         leaguerId,
         userId
       );
+
+      console.log(answerDate)
 
       await this.answerDatabase.postAnswer(newAnswer);
     } catch (error: any) {

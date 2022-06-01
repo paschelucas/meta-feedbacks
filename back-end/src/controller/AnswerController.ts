@@ -17,28 +17,38 @@ export class AnswerController {
         answerId,
         questionId,
         answerText,
+        answerDate: new Date()
+          .toLocaleDateString("pt-br")
+          .split("/")
+          .reverse()
+          .join("/"),
         leaguerId,
         userId,
       };
       await this.answerBusiness.postAnswer(answerInput);
 
-      res.status(201).send({message: "Resposta postada com sucesso."})
+      res.status(201).send({ message: "Resposta postada com sucesso." });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
     }
   };
 
-  public getAnswersByLeaguerId = async (req: Request, res: Response): Promise<void> => {
+  public getAnswersByLeaguerId = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const leaguerId = req.params.leaguerId;
 
-      const answers = await this.answerBusiness.getAnswersByLeaguerId(leaguerId);
+      const answers = await this.answerBusiness.getAnswersByLeaguerId(
+        leaguerId
+      );
 
-      res.status(200).send({answers: answers})
+      res.status(200).send({ answers: answers });
     } catch (error: any) {
       const { statusCode, message } = error;
       res.status(statusCode || 400).send({ message });
     }
-  }
+  };
 }
