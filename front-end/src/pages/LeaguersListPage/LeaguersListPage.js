@@ -1,9 +1,12 @@
 import React, { useContext } from "react"; 
 import { useForm } from "react-hook-form";
+import GlobalContext from "../../Global/GlobalContext";
 import useProtectedPage from '../../hooks/useProtectedPage'
+import { Button, Input } from "../LoginPage/styled";
 
 
-const LoginPage = () => {
+const LeaguersListPage = () => {
+
   useProtectedPage();
   const {register, handleSubmit, formState: {errors}} = useForm();
   const {login, isLoading, errorMessage} = useContext(GlobalContext);
@@ -23,4 +26,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default LeaguersListPage
