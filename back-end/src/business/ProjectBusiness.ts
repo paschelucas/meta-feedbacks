@@ -73,14 +73,15 @@ export class ProjectBusiness {
         );
       }
 
-      const foundProjectName = await this.projectDatabase.getProjectByName(
-        name
-      );
+      const [foundProjectName, foundProject] = await Promise.allSettled([
+        this.projectDatabase.getProjectByName(name),
+        this.projectDatabase.getProjectById(id),
+      ]);
+
       if (foundProjectName) {
         throw new CustomError(422, "Já existe um projeto com este nome.");
       }
 
-      const foundProject = await this.projectDatabase.getProjectById(id);
       if (!foundProject) {
         throw new CustomError(404, "Projeto não encontrado.");
       }
@@ -104,26 +105,24 @@ export class ProjectBusiness {
       }
 
       if (!id) {
-        throw new CustomError(
-          422,
-          "Por favor, escolha um projeto."
-        );
+        throw new CustomError(422, "Por favor, escolha um projeto.");
       }
 
-      const foundProject = await this.projectDatabase.getProjectById(id);
+      const [foundProject, selectedProjectLeaguers] = await Promise.all([
+        this.projectDatabase.getProjectById(id),
+        this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(id),
+      ]);
+
       if (!foundProject) {
         throw new CustomError(404, "Projeto não encontrado.");
       }
 
-      const selectedProjectLeaguers =
-      await this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(id)
-
-    for (let leaguer of selectedProjectLeaguers) {
-      await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(
-        id,
-        leaguer.leaguer_id
-      );
-    }
+      for (let leaguer of selectedProjectLeaguers) {
+        await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(
+          id,
+          leaguer.leaguer_id
+        );
+      }
 
       await this.projectDatabase.deleteProject(id);
     } catch (error: any) {
