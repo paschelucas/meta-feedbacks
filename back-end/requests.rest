@@ -136,3 +136,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2It
     "fase": "beta",
     "responsavel": "Teste"
 }
+
+###
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDExNzQ2MCwiZXhwIjoxNjU0MTI0NjYwfQ.N5YLpMHyUx_UcdWU28hvChrHDkDdjPEfLTyV3HyopVw
+
+{
+    "name": "Teste4",
+    "email": "teste4@lab.com",
+    "password": "Teste41234",
+    "role": "adm"
+}
