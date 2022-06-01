@@ -58,8 +58,6 @@ export class AnswerBusiness {
         userId
       );
 
-      console.log(answerDate)
-
       await this.answerDatabase.postAnswer(newAnswer);
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);

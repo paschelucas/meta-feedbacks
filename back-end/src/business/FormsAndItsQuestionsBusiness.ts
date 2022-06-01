@@ -11,7 +11,7 @@ export class FormsAndItsQuestionsBusiness {
     private formDatabase: FormDatabase,
     private questionDatabase: QuestionDatabase
   ) {}
-  
+
   public insertQuestionInAForm = async (
     insertQuestionInAFormInput: InsertQuestionInAFormDTO
   ) => {
@@ -21,24 +21,23 @@ export class FormsAndItsQuestionsBusiness {
       if (!formId || !questionId) {
         throw new CustomError(422, "Por favor, preencha todos os campos.");
       }
+      const [foundForm, foundQuestion, notUniqueQuestion] =
+        await Promise.allSettled([
+          this.formDatabase.getFormById(formId),
+          this.questionDatabase.getQuestionById(questionId),
+          this.formsAndItsQuestionsDatabase.uniqueQuestionVerifier(
+            formId,
+            questionId
+          ),
+        ]);
 
-      const foundForm = await this.formDatabase.getFormById(formId);
       if (!foundForm) {
         throw new CustomError(404, "Formulário não encontrado.");
       }
 
-      const foundQuestion = await this.questionDatabase.getQuestionById(
-        questionId
-      );
       if (!foundQuestion) {
         throw new CustomError(404, "Pergunta não encontrada.");
       }
-
-      const notUniqueQuestion =
-        await this.formsAndItsQuestionsDatabase.uniqueQuestionVerifier(
-          formId,
-          questionId
-        );
 
       if (notUniqueQuestion) {
         throw new CustomError(
@@ -52,6 +51,7 @@ export class FormsAndItsQuestionsBusiness {
         formId,
         questionId
       );
+
       await this.formsAndItsQuestionsDatabase.insertQuestionInAForm(
         newQuestionInAForm
       );
@@ -68,15 +68,15 @@ export class FormsAndItsQuestionsBusiness {
       if (!formId || !questionId) {
         throw new CustomError(422, "Por favor, preencha todos os campos.");
       }
+      const [foundForm, foundQuestion] = await Promise.allSettled([
+        this.formDatabase.getFormById(formId),
+        this.questionDatabase.getQuestionById(questionId),
+      ]);
 
-      const foundForm = await this.formDatabase.getFormById(formId);
       if (!foundForm) {
         throw new CustomError(404, "Formulário não encontrado.");
       }
 
-      const foundQuestion = await this.questionDatabase.getQuestionById(
-        questionId
-      );
       if (!foundQuestion) {
         throw new CustomError(404, "Pergunta não encontrada.");
       }

@@ -45,13 +45,13 @@ export default class UserBusiness {
       }
 
       const validPasswordVerifier: RegExp =
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{9,}$/;
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{9,}$/;
       const isPasswordValid = validPasswordVerifier.test(password);
 
       if (!isPasswordValid) {
         throw new CustomError(
           422,
-          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
+          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula, uma minúscula e pelo menos um dos seguintes caracteres especiais: '$', '*', '&', '@' e/ou '#'."
         );
       }
 
@@ -157,12 +157,14 @@ export default class UserBusiness {
         throw new CustomError(403, "Usuário não autorizado.");
       }
 
-      const registeredUser = await this.userDatabase.getUserByName(userName);
+      const [registeredUser, newAuthorization] = await Promise.allSettled([
+        this.userDatabase.getUserByName(userName),
+        this.userDatabase.editUserRole(input),
+      ]);
+
       if (!registeredUser) {
         throw new CustomError(422, "Usuário não cadastrado.");
       }
-
-      const newAuthorization = await this.userDatabase.editUserRole(input);
 
       return newAuthorization;
     } catch (error: any) {
@@ -178,21 +180,26 @@ export default class UserBusiness {
         throw new CustomError(422, "Favor informar email e senha provisória.");
       }
 
-    const validPasswordVerifier: RegExp =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{9,}$/;
-    const isPasswordValid = validPasswordVerifier.test(new_password);
+      const validPasswordVerifier: RegExp =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{9,}$/;
+      const isPasswordValid = validPasswordVerifier.test(new_password);
 
-    if (!isPasswordValid) {
-      throw new CustomError(
-        422,
-        "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
-      );
-    }
+      if (!isPasswordValid) {
+        throw new CustomError(
+          422,
+          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
+        );
+      }
 
-      const registeredUser = await this.userDatabase.getUserByEmail(email);
+      const [registeredUser, hashPassword] = await Promise.all([
+        this.userDatabase.getUserByEmail(email),
+        this.hashManager.hash(new_password),
+      ]);
+
       if (!registeredUser) {
         throw new CustomError(404, "Este usuário não está cadastrado.");
       }
+
       const passwordIsCorrect = await this.hashManager.compare(
         password,
         registeredUser.user_password
@@ -202,29 +209,26 @@ export default class UserBusiness {
         throw new CustomError(403, "Email ou senha provisória incorretos.");
       }
 
-      const role = registeredUser.user_role
-      
-      const name = registeredUser.user_name
+      const role = registeredUser.user_role;
 
-      const hashPassword = await this.hashManager.hash(new_password);
+      const name = registeredUser.user_name;
 
       const hashInput: EditPasswordInputDTO = {
         email,
         password,
-        new_password: hashPassword
-      }
-      
+        new_password: hashPassword,
+      };
+
       await this.userDatabase.editPassword(hashInput);
 
       const token = this.authenticator.generate({
         id: registeredUser.user_id,
-        role
+        role,
       });
 
-      const auth = {token, name, role}
+      const auth = { token, name, role };
 
       return auth;
-
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
