@@ -25,7 +25,6 @@ import { UserInputDTO } from "../src/types/DTO/UserInputDTO";
             }
              await userBusinessMock.signUp(input1, "token_mockado")
          } catch (error) {
-             //422, "Missing input"
              if (error instanceof CustomError) {
                  expect(error.message).toEqual("Favor preencher todos os campos.")
                  expect(error.statusCode).toEqual(422)
@@ -121,6 +120,7 @@ import { UserInputDTO } from "../src/types/DTO/UserInputDTO";
         }
 
         await userBusinessMock.signUp(input4, "token_mockado")
+
          } catch (error) {
              console.log(error)
          }

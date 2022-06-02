@@ -1,12 +1,9 @@
 import { userMock1, userMock2, userMock3 } from "./userMock";
 import User from "../../src/model/User";
-import { BaseDatabase } from "../../src/data/BaseDatabase";
 import { EditRoleInputDTO } from "../../src/types/DTO/EditRoleInputDTO";
 import { EditPasswordInputDTO } from "../../src/types/DTO/EditPasswordInputDTO";
 
-export default class UserDatabaseMock extends BaseDatabase {
-  protected TABLE_NAME = "users";
-
+export default class UserDatabaseMock {
   insert = async (user: User): Promise<void> => {};
 
   getAllUsers = async (): Promise<User[]> => {

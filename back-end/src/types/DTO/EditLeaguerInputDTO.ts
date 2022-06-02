@@ -3,5 +3,5 @@ export interface EditLeaguerInputDTO{
     name: string;
     turma: string;
     fase: string;
-    responsavel: string
+    responsavel: string;
 }

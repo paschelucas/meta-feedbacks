@@ -105,11 +105,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2It
 
 PUT http://localhost:3003/leaguers/editfase
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzcwNzQ3NiwiZXhwIjoxNjUzNzE0Njc2fQ.0CzuULKwE2GBDixjh5FbcInCuhkgSHCyEf5dnkVyemo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDEzNzIzMCwiZXhwIjoxNjU0MTQ0NDMwfQ.N08cSeSa-uJy1ZWcphHHfa7-nfAPja0D7YRZFnScr1A
 
 {
     "leaguerId": "80b70ee8-010a-4be5-a40f-dee8a2162d9c",
-    "newFase": "introducao"
+    "newFase": "avancado"
 }
 
 ###
@@ -127,13 +127,13 @@ Content-Type: application/json
 
 PUT http://localhost:3003/leaguers/edit
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1ODcwYjU1LTllY2ItNGRmOC04Mzg1LTI3ZmNhODhjMTBlZCIsInJvbGUiOiJnZXN0b3IiLCJpYXQiOjE2NTM3ODk2MTYsImV4cCI6MTY1Mzc5NjgxNn0.bmSsg5S2TaksK3fSHLslyJZXRyZwWmneByVYXcnI13M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDEzNzIzMCwiZXhwIjoxNjU0MTQ0NDMwfQ.N08cSeSa-uJy1ZWcphHHfa7-nfAPja0D7YRZFnScr1A
 
 {
     "id": "2516189c-c4af-4b7f-8259-d6f215720310",
     "name": "Teste3",
     "turma": "turma-2",
-    "fase": "beta",
+    "fase": "introducao",
     "responsavel": "Teste"
 }
 

@@ -28,6 +28,14 @@ export default class LeaguerBusiness {
         throw new CustomError(422, "Favor preencher todos os campos.");
       }
 
+      if (turma !== "turma-piloto" && turma !== "turma-1" && turma !== "turma-2" && turma !== "turma-3") {
+        throw new CustomError(422, "Tipo de turma inválido.");
+      }
+
+      if (fase !== "introducao" && fase !== "labs" && fase !== "beta") {
+        throw new CustomError(422, "Tipo de fase inválido.");
+      }
+
       const tokenData = this.authenticator.getTokenData(token);
       if (!tokenData) {
         throw new CustomError(422, "Token inválido ou não passado.");
@@ -125,6 +133,10 @@ export default class LeaguerBusiness {
       throw new CustomError(422, "Favor informar id do leaguer e fase atualizada.");
     }
 
+    if (newFase !== "introducao" && newFase !== "labs" && newFase !== "beta") {
+      throw new CustomError(422, "Tipo de fase inválido.");
+    }
+
     const tokenData = this.authenticator.getTokenData(token);
 
     if (!tokenData) {
@@ -153,6 +165,14 @@ export default class LeaguerBusiness {
 
       if (!name || !turma || !fase || !responsavel) {
         throw new CustomError(422, "Favor preencher todos os campos.");
+      }
+
+      if (turma !== "turma-piloto" && turma !== "turma-1" && turma !== "turma-2" && turma !== "turma-3") {
+        throw new CustomError(422, "Tipo de turma inválido.");
+      }
+
+      if (fase !== "introducao" && fase !== "labs" && fase !== "beta") {
+        throw new CustomError(422, "Tipo de fase inválido.");
       }
 
       const tokenData = this.authenticator.getTokenData(token);

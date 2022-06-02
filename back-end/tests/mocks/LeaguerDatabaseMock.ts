@@ -1,12 +1,9 @@
-import { BaseDatabase } from "../../src/data/BaseDatabase";
 import Leaguer from "../../src/model/Leaguer";
 import { EditFaseInputDTO } from "../../src/types/DTO/EditFaseInputDTO";
 import { EditLeaguerInputDTO } from "../../src/types/DTO/EditLeaguerInputDTO";
 import { leaguerMock1, leaguerMock2, leaguerMock3 } from "./leaguerMock";
 
-export default class LeaguerDatabase extends BaseDatabase {
-  protected TABLE_NAME = "leaguers";
-
+export default class LeaguerDatabaseMock {
   public insert = async (leaguer: Leaguer): Promise<void> => {};
 
   public getAllLeaguers = async (): Promise <Leaguer[]> => {
