@@ -1,9 +1,12 @@
+import { Container } from "@mui/system";
 import React, { useContext, useEffect } from "react"; 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { goBack } from "../../routes/coordinator";
+import {Header,Main,H1} from "./styled";
+
 
 const LeaguersSignUpPage = () => {
   useUnprotectedPage();
@@ -24,10 +27,12 @@ const LeaguersSignUpPage = () => {
   return (
     <>
       <div>
-        <header>
+        
+        <Header>
           <button type="button" onClick={() => goBack(navigate)}>{'<'}</button>
-          <h1>Cadastro de Leaguer</h1>
-        </header>
+          <H1>Cadastro de Leaguer</H1>
+        </Header>
+        <Main>
         <form onSubmit={handleSubmit(leaguersSignup)}>
         <input {...register("name", {required: "Precisa ter um nome"})} type="text" placeholder="Name"/>
           {errors ? <p>{errors.name?.message}</p> : <></>}
@@ -46,6 +51,7 @@ const LeaguersSignUpPage = () => {
           
           <button type="submit">Fazer cadastro</button>
         </form>
+        </Main>
       </div>
     </>
   )

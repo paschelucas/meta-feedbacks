@@ -9,7 +9,7 @@ font-family: 'Open Sans', sans-serif;
 height:250px;
 width:200px;
 margin:25px;
-border-radius: 25px;
+border-radius: 10px;
 border:transparent;
 background: #e0e0e0;
 box-shadow:  29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;
@@ -18,6 +18,7 @@ box-shadow:  29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;
   background-color:#4066EB;
   color:white;
   transition:0.3s;
+  cursor: pointer;
   
 
 }
@@ -26,19 +27,19 @@ box-shadow:  29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;
 export const Ul = styled.ul`
     display:flex;
     flex-direction:row;
-    margin: 0 auto;
+    margin: auto;
     align-items:center;
 
 `
+
 export const Logout = styled.div`
 display:flex;
 float: right;
 margin-right:20px;
 margin-top:15px;
 `
-export const Header = styled.div`
-
-width:100%;
+export const Header = styled.header`
+width:100vw;
 height:11vh;
 background-color:#122870;
 box-shadow:  15px 15px 30px #7d7d7d,-15px -15px 30px #ffffff;
@@ -57,16 +58,27 @@ justify-content:center;
 align-items:center;
 `
 export const H2 = styled.h2`
-margin-top:25px;
+margin-top:35px;
 font-family: 'Open Sans', sans-serif;
-margin-left:15px;
+font-weight:bold;
+margin-left:25px;
 `
 export const PMessage = styled.p`
 margin-top:25px;
 font-family: 'Open Sans', sans-serif;
-margin-left:15px;
+margin-left:25px;
 `
+export const ButtonLogout = styled.button`
+margin-top:5px;
+color:#fff;
+font-family: 'Open Sans', sans-serif;
 
+
+:hover{
+  font-weight:bold;
+  cursor: pointer;
+}
+`
 
 export const Container = styled.div`
     display:flex;

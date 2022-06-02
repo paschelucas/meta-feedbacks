@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import GlobalContext from "../../Global/GlobalContext";
 import useProtectedPage from '../../hooks/useProtectedPage'
-import { Button, Input } from "../LoginPage/styled";
+import { Button, Input} from "./styled";
 
 
 const LeaguersListPage = () => {
@@ -13,7 +13,7 @@ const LeaguersListPage = () => {
 
   return (
     <div>
-           
+          
       <form onSubmit={handleSubmit(login)}>
         <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
         {errors ? <p>{errorMessage}</p> : <></>}

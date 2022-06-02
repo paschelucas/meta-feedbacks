@@ -1,7 +1,7 @@
 import React, { useContext } from "react"; 
 import { useForm } from "react-hook-form";
 import GlobalContext from '../../Global/GlobalContext.js'
-import { ContainerLogin,Input,Img,H3,Button,Span,ImgFeedbacks, ImgLogo} from "./styled.js";
+import { ContainerLogin,Input,Img,H3,Button,Span,ImgFeedbacks,ImgLogo} from "./styled.js";
 import background from '../../assets/img/background.png'
 import logo from '../../assets/img/logo.png'
 import logofeedbacks from '../../assets/img/logofeedbacks.png'
