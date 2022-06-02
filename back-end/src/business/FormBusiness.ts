@@ -58,23 +58,25 @@ export class FormBusiness {
   public deleteForm = async (deleteFormInput: DeleteFormDTO): Promise<void> => {
     try {
       const { id, token } = deleteFormInput;
-      const foundForm = await this.formDatabase.getFormById(id);
 
+      
       if (!token) {
         throw new CustomError(401, "Usuário não identificado.");
       }
-
+      
       const tokenData = this.authenticator.getTokenData(token);
       if (tokenData.role !== "admin") {
         throw new CustomError(403, "Usuário não autorizado.");
       }
+      
+      const [foundForm, selectedFormQuestions] = await Promise.all([
+         this.formDatabase.getFormById(id),
+         this.formsAndItsQuestionsDatabase.getQuestionsByFormId(id)
+      ])
 
       if (!foundForm) {
         throw new CustomError(422, "Formulário não encontrado.");
       }
-
-      const selectedFormQuestions =
-        await this.formsAndItsQuestionsDatabase.getQuestionsByFormId(id);
 
       for (let question of selectedFormQuestions) {
         await this.formsAndItsQuestionsDatabase.removeQuestionFromAForm(

@@ -59,7 +59,6 @@ export default class LeaguerBusiness {
       await this.leaguerDatabase.insert(newLeaguer);
 
       return newLeaguer;
-
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
@@ -77,7 +76,6 @@ export default class LeaguerBusiness {
 
       if (tokenData.role !== "admin" && tokenData.role !== "mentor") {
         try {
-
           const leaguers = await this.leaguerDatabase.findByUserId(userId);
 
           return leaguers;
@@ -86,19 +84,21 @@ export default class LeaguerBusiness {
         }
       }
 
-      const allLeaguers: LeaguerResponse = await this.leaguerDatabase.getAllLeaguers();
+      const allLeaguers: LeaguerResponse =
+        await this.leaguerDatabase.getAllLeaguers();
 
-      const responsaveisNomes = []
-      
-      for(let leaguer of allLeaguers) {
-        const responsavel = await this.userDatabase.getUserById(leaguer.leaguer_responsavel);
+      const responsaveisNomes = [];
+
+      for (let leaguer of allLeaguers) {
+        const responsavel = await this.userDatabase.getUserById(
+          leaguer.leaguer_responsavel
+        );
         leaguer = {
           ...leaguer,
-          leaguer_responsavel: responsavel.user_name
-        }
+          leaguer_responsavel: responsavel.user_name,
+        };
 
-        responsaveisNomes.push(leaguer)
-        
+        responsaveisNomes.push(leaguer);
       }
 
       return responsaveisNomes;
@@ -125,16 +125,19 @@ export default class LeaguerBusiness {
     }
   };
 
-  editLeaguerFase = async (token: string, input:EditFaseInputDTO) => {
+  editLeaguerFase = async (token: string, input: EditFaseInputDTO) => {
     try {
-    const {leaguerId, newFase} = input
-      
-    if (!leaguerId || !newFase) {
-      throw new CustomError(422, "Favor informar id do leaguer e fase atualizada.");
-    }
+      const { leaguerId, newFase } = input;
 
     if (newFase !== "introducao" && newFase !== "labs" && newFase !== "beta") {
       throw new CustomError(422, "Tipo de fase inválido.");
+    }
+
+    if (!leaguerId || !newFase) {
+      throw new CustomError(
+        422,
+        "Favor informar id do leaguer e fase atualizada."
+      );
     }
 
     const tokenData = this.authenticator.getTokenData(token);
@@ -150,16 +153,15 @@ export default class LeaguerBusiness {
     const newLeaguer = await this.leaguerDatabase.editLeaguerFase(input);
 
     return newLeaguer;
-
-  } catch (error: any) {
+    } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
-  }
+    }
   };
 
   editLeaguer = async (
     input: EditLeaguerInputDTO,
     token: string
-  ): Promise <Leaguer | undefined> => {
+  ): Promise<Leaguer | undefined> => {
     try {
       const { id, name, turma, fase, responsavel } = input;
 
@@ -192,16 +194,14 @@ export default class LeaguerBusiness {
         name,
         turma: Leaguer.stringToTurmaRole(turma),
         fase: Leaguer.stringToFaseRole(fase),
-        responsavel: user.user_id
+        responsavel: user.user_id,
       };
 
       const result = await this.leaguerDatabase.editLeaguer(alteredLeaguer);
 
       return result;
-
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
-
 }

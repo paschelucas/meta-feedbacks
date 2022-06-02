@@ -26,10 +26,10 @@ export const goToLeaguersSignup = (Navigate) => {
   Navigate("/leaguers/cadastro")
 };
 
-export const goToUserOptions = (Navigate) => {
-  Navigate("/user_options")
+export const goToColaboratorsList = (Navigate) => {
+  Navigate("/colaboradores")
 };
 
 export const goToEvaluationProcess = (Navigate) => {
-  Navigate("/evolucao_processo")
+  Navigate("/avaliacao")
 };

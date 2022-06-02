@@ -86,9 +86,11 @@ export class QuestionBusiness {
     }
   };
 
-  public deleteQuestion = async (deleteQuestionInput: DeleteQuestionDTO): Promise<void> => {
+  public deleteQuestion = async (
+    deleteQuestionInput: DeleteQuestionDTO
+  ): Promise<void> => {
     try {
-      const {id, token} = deleteQuestionInput
+      const { id, token } = deleteQuestionInput;
 
       if (!token) {
         throw new CustomError(401, "Usuário não identificado.");
@@ -98,7 +100,7 @@ export class QuestionBusiness {
       if (tokenData.role !== "admin") {
         throw new CustomError(403, "Usuário não autorizado.");
       }
-      
+
       if (!id) {
         throw new CustomError(
           422,

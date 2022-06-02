@@ -10,6 +10,7 @@ export class AnswerDatabase extends BaseDatabase {
         answer_id: answer.getAnswerId(),
         question_id: answer.getQuestionId(),
         answer_text: answer.getAnswerText(),
+        answer_date: answer.getAnswerDate(),
         leaguer_id: answer.getLeaguerId(),
         user_id: answer.getUserId(),
       });

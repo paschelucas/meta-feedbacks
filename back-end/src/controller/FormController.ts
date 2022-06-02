@@ -59,4 +59,14 @@ export class FormController {
       res.status(statusCode || 400).send({ message });
     }
   };
+
+  public sendForm = async (req: Request, res: Response): Promise<void> => {
+    try {
+      
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+
+    }
+  }
 }
