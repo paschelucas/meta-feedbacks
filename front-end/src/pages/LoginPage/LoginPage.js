@@ -20,7 +20,7 @@ const LoginPage = () => {
       <Img src={background}/>
     <ContainerLogin>
       <ImgLogo src={logo}/>
-      <H3>Bem vindo!</H3>
+      <H3>Bem vinde!</H3>
       <Span>Faça o seu login.</Span>
       <form onSubmit={handleSubmit(login)}>
         <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
