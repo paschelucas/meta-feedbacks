@@ -21,24 +21,23 @@ export class ProjectsAndItsLeaguersBusiness {
       if (!projectId || !leaguerId) {
         throw new CustomError(422, "Por favor, preencha todos os campos.");
       }
+      const [foundProject, foundLeaguer, notUniqueLeaguer] =
+        await Promise.allSettled([
+          this.projectDatabase.getProjectById(projectId),
+          this.leaguerDatabase.findLeaguerById(leaguerId),
+          this.projectsAndItsLeaguersDatabase.uniqueLeaguerVerifier(
+            projectId,
+            leaguerId
+          ),
+        ]);
 
-      const foundProject = await this.projectDatabase.getProjectById(projectId);
       if (!foundProject) {
         throw new CustomError(404, "Projeto não encontrado.");
       }
 
-      const foundLeaguer = await this.leaguerDatabase.findLeaguerById(
-        leaguerId
-      );
       if (!foundLeaguer) {
         throw new CustomError(404, "Leaguer não encontrado.");
       }
-
-      const notUniqueLeaguer =
-        await this.projectsAndItsLeaguersDatabase.uniqueLeaguerVerifier(
-          projectId,
-          leaguerId
-        );
 
       if (notUniqueLeaguer) {
         throw new CustomError(
@@ -66,24 +65,28 @@ export class ProjectsAndItsLeaguersBusiness {
     leaguerId: string
   ) => {
     try {
-
       if (!projectId || !leaguerId) {
         throw new CustomError(422, "Por favor, preencha todos os campos.");
       }
 
-      const foundProject = await this.projectDatabase.getProjectById(projectId)
+      const [foundProject, foundLeaguer] =
+        await Promise.allSettled([
+          this.projectDatabase.getProjectById(projectId),
+          this.leaguerDatabase.findLeaguerById(leaguerId),
+        ]);
+
       if (!foundProject) {
         throw new CustomError(404, "Formulário não encontrado.");
       }
 
-      const foundLeaguer = await this.leaguerDatabase.findLeaguerById(
-        leaguerId
-      );
       if (!foundLeaguer) {
         throw new CustomError(404, "Leaguer não encontrado.");
       }
 
-      await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(projectId, leaguerId)
+      await this.projectsAndItsLeaguersDatabase.removeLeaguersFromAProject(
+        projectId,
+        leaguerId
+      );
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
@@ -96,7 +99,9 @@ export class ProjectsAndItsLeaguersBusiness {
       }
 
       const leaguers =
-        await this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(projectId)
+        await this.projectsAndItsLeaguersDatabase.getLeaguersByProjectId(
+          projectId
+        );
 
       return leaguers;
     } catch (error: any) {
