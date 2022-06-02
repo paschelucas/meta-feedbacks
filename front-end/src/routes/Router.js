@@ -2,8 +2,8 @@ import GlobalState from "../Global/GlobalState";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import HomePage from "../Pages/HomePage/HomePage";
-import LoginPage from "../pages/LoginPage/LoginPage";
-import SignUpPage from "../pages/SignUpPage/SignUpPage"
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import SignUpPage from "../Pages/SignUpPage/SignUpPage"
 import MenuPage from "../Pages/MenuPage/MenuPage";
 import LeaguersListPage from '../Pages/LeaguersListPage/LeaguersListPage'
 import LeaguersSignupPage from '../Pages/LeaguersSignupPage/LeaguersSignupPage';
