@@ -1,4 +1,4 @@
-/* import React, { useContext } from "react"; 
+import React, { useContext } from "react"; 
 import { useForm } from "react-hook-form";
 import GlobalContext from "../../Global/GlobalContext";
 import useProtectedPage from '../../hooks/useProtectedPage'
@@ -26,8 +26,4 @@ const LeaguersListPage = () => {
   )
 }
 
-<<<<<<< HEAD
-export default LoginPage */
-=======
-export default LeaguersListPage
->>>>>>> dc6c71df29c12a1e234517f6eab2c41f1ef25eb8
+export default LeaguersListPage;
