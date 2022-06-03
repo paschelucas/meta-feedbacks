@@ -4,11 +4,12 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import SignUpPage from "../Pages/SignUpPage/SignUpPage";
 import LeaguersListPage from "../Pages/LeaguersListPage/LeaguersListPage";
 import LeaguersSignUpPage from "../Pages/LeaguersSignupPage/LeaguersSignupPage";
-import ColaboratorsListPage from "../Pages/ColaboratorsListPage/ColaboratorsListPage";
+import CollaboratorsListPage from "../Pages/CollaboratorsListPage/CollaboratorsListPage";
 import MenuPage from "../Pages/MenuPage/MenuPage";
 import EvaluationProcess from "../Pages/EvaluationProcess/EvaluationProcess";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import HomePage from "../Pages/HomePage/HomePage"
+import LeaguerProfilePage from "../Pages/LeaguerProfilePage/LeaguerProfilePage";
 
 
 const Router = () => {
@@ -20,8 +21,9 @@ const Router = () => {
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/cadastro" element={<SignUpPage/>} />
         <Route path="/leaguers" element={<LeaguersListPage/>}/>
+        <Route path="/leaguers/profile" element={<LeaguerProfilePage/>}/>
         <Route path="/leaguers/cadastro" element={<LeaguersSignUpPage/>}/>
-        <Route path="/colaboradores" element={<ColaboratorsListPage/>}/>
+        <Route path="/colaboradores" element={<CollaboratorsListPage/>}/>
         <Route path="/menu" element={<MenuPage/>} />
         {/* Perguntar pro Brito */}
         <Route path="/avaliacao" element={<EvaluationProcess/>}/>

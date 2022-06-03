@@ -1,6 +1,6 @@
 import GlobalContext from "./GlobalContext";
 import useRequest from '../hooks/useRequest.js';
-import { goToLogin, goToMenu } from "../routes/coordinator";
+import { goToLeaguerProfile, goToLogin, goToMenu } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { base_URL } from '../constants/urls';
 import { header } from '../constants/header';
@@ -17,6 +17,7 @@ const GlobalState = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [leaguers, setLeaguers] = useState([]);
     const [users, setUsers] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
     
     // user info
     const userRole = localStorage.getItem('role');
@@ -26,13 +27,12 @@ const GlobalState = (props) => {
     const login = async (data) => {
         const res = await makeRequest('post', `${base_URL}user/login`, data);
 
-        console.log(res);
-
         if (res.auth) {
             const {token, name, role} = res.auth;
             localStorage.setItem('role', role);
             localStorage.setItem('name', name)
             localStorage.setItem('token', token);
+            goToMenu(navigate);
         }
 
         else {
@@ -45,6 +45,7 @@ const GlobalState = (props) => {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('role');
+        localStorage.removeItem('leaguer');
         goToLogin(navigate);
     };
     
@@ -57,14 +58,13 @@ const GlobalState = (props) => {
         }
 
         else {
-            console.log(res);
             setErrorMessage(res);
         }  
     };
     
     const getUsers = async () => {
         const res = await makeRequest('get', `${base_URL}user`, header);
-        
+
         setUsers(res);
     };  
 
@@ -81,9 +81,9 @@ const GlobalState = (props) => {
 
         setMessage(res.message);
 
+        
         close();
     };
-
 
     // Leaguers related functions
     const leaguersSignup = async (data) => {
@@ -101,12 +101,23 @@ const GlobalState = (props) => {
 
     const getLeaguers = async () => {
         const res = await makeRequest('get', `${base_URL}leaguers`, header);
-        console.log(res)
         setLeaguers(res.leaguers);
     };
 
+    const getLeaguerProfile = (leag) => {
+        localStorage.setItem('leaguer', JSON.stringify(leag));
+        goToLeaguerProfile(navigate);
+    };
+
+    // Other functions
+    const onChangeSearch = (evt) => {
+        setSearchInput(evt.target.value);
+    };
+
     const value = { 
-        isLoading, 
+        isLoading,
+        searchInput,
+        onChangeSearch, 
         userRole, 
         userName,
         message, 
@@ -115,7 +126,8 @@ const GlobalState = (props) => {
         logout, 
         signup, 
         leaguersSignup, 
-        getLeaguers, 
+        getLeaguers,
+        getLeaguerProfile, 
         getUsers,
         leaguers,
         users,
