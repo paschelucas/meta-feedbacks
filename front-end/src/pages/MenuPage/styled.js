@@ -23,6 +23,22 @@ box-shadow:  29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;
 
 }
 
+@media screen and (min-width :320px) and
+    (max-width : 480px) {
+    // ** mobile    
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   font-family: 'Open Sans', sans-serif;
+   height:250px;
+   width:200px;
+   margin:25px;
+   border-radius: 10px;
+   border:transparent;
+   background: #e0e0e0;
+   box-shadow:  29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;  
+  }
+
 `
 export const Ul = styled.ul`
     display:flex;
@@ -44,12 +60,25 @@ height:11vh;
 background-color:#122870;
 box-shadow:  15px 15px 30px #7d7d7d,-15px -15px 30px #ffffff;
 
+@media screen and (min-width:320px) and
+    (max-width : 480px) {
+    // ** mobile    
+    width:100vw;
+    height:10vh;   
+  }
 `
 export const ImgLogo = styled.img`
 margin-top:15px;
 margin-left:15px;
 width:10%;
 height:5vh;
+
+@media screen and (min-width :320px) and
+    (max-width : 480px) {
+    // ** mobile    
+    width:25vw;
+    height:5vh;   
+  }
 `
 export const Icons = styled.div`
 display:flex;
@@ -69,15 +98,17 @@ font-family: 'Open Sans', sans-serif;
 margin-left:25px;
 `
 export const ButtonLogout = styled.button`
-margin-top:5px;
-color:#fff;
-font-family: 'Open Sans', sans-serif;
+    margin-right:50px;
+    background-color:transparent;
+    color:white;
+    border:none;
+    font-family: 'Open Sans', sans-serif;
+    font-size:1rem;
 
-
-:hover{
-  font-weight:bold;
-  cursor: pointer;
-}
+    :hover{
+        font-weight:bold;
+        cursor:pointer;
+  }
 `
 
 export const Container = styled.div`
@@ -87,6 +118,7 @@ export const Container = styled.div`
     height:60vh;
     padding:15px;
     margin: auto;
+    
     
    
  

@@ -1,29 +1,61 @@
-import React, { useContext } from "react"; 
-import { useForm } from "react-hook-form";
+import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../Global/GlobalContext";
-import useProtectedPage from '../../hooks/useProtectedPage'
-import { Button, Input} from "./styled";
+import useUnprotectedPage from "../../hooks/useUnprotectedPage";
+import { useNavigate } from "react-router-dom";
+import { goBack,goToLeaguersSignup } from "../../routes/coordinator";
+import LeaguerCard from "../../Components/LeaguerCard/LeaguerCard";
 
 
 const LeaguersListPage = () => {
+    useUnprotectedPage();
 
-  useProtectedPage();
-  const {register, handleSubmit, formState: {errors}} = useForm();
-  const {login, isLoading, errorMessage} = useContext(GlobalContext);
+    const navigate = useNavigate();
+    const { leaguers, getLeaguers } = useContext(GlobalContext);
+    const [input, setInput] = useState("");
 
-  return (
-    <div>
+    useEffect(() => {
+        getLeaguers();
+    }, []);
+
+    const onChangeInput = (event) => {
+        setInput(event.target.value);
+    }
+    console.log(leaguers)
+    const mountLeaguers = leaguers.map((leaguer) => {
+      
+      return (
           
-      <form onSubmit={handleSubmit(login)}>
-        <Input {...register("email", {required: "Precisa ter um email válido"})} type="email" placeholder="digite seu email"/>
-        {errors ? <p>{errorMessage}</p> : <></>}
-        <Input {...register("password", {required: true})} type="password" placeholder="digite sua senha"/>
-        {errors ? <p>{errors.password?.message}</p> : <></>}
-        <Button type="submit">ENTRAR</Button>
-      </form>
-     
-    </div>
-  )
-}
 
+            <div key={leaguer.leaguer_id}>
+
+                 <hr/>
+                
+                <LeaguerCard key={leaguer.leaguer_id} name={leaguer.leaguer_name} turma={leaguer.leaguer_turma} fase={leaguer.leaguer_fase} responsavel={leaguer.leaguer_responsavel} /> 
+            
+            </div>
+        );
+    });
+
+    return (
+        <>
+
+            <header>
+                <h1>Leaguers</h1>
+                <button type="button" onClick={() => goBack(navigate)}>{'Back'}</button>
+
+            </header>
+            <div>
+                <ul>
+                    <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
+                    <input type={'text'} placeholder="Leaguer" value={input} onChange={onChangeInput}></input>
+                    <main>
+                        <ul>{mountLeaguers && mountLeaguers}</ul>
+                        <ul>{!input ? <p>Buscar por leaguers</p> : mountLeaguers.length === 0 ? <p>Não encontrado 😕</p> : mountLeaguers}</ul>
+                    </main>
+                </ul>
+            </div>
+
+        </>
+    );
+};
 export default LeaguersListPage;

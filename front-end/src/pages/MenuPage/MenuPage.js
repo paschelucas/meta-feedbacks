@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from '../../hooks/useUnprotectedPage';
 import { goToLeaguersList, goToLeaguersSignup, goToColaboratorsList } from "../../routes/coordinator";
-import { Header, Logout, ImgLogo, Button, Container, Ul,Icons,H2,ButtonLogout,PMessage} from "./styled";
+import { Header, Logout, ImgLogo, ButtonLogout, Container, Ul,Icons,H2,Button,PMessage} from "./styled";
 import MetaLogoWhite from '../../assets/img/MetaLogoWhite.png'
 import {FiUsers} from 'react-icons/fi'
 import {FiUserPlus} from 'react-icons/fi'
@@ -34,7 +34,7 @@ const MenuPage = () => {useUnprotectedPage();
                             
                             <Button type="button" onClick={() => goToLeaguersList(navigate)}>
                                 <Icons><FiUsers style={{fontSize:50}}/>Ver Leaguers</Icons></Button></li>
-                        {(userRole === 'admin' || userRole === 'mentor') ? <li><Button uttontype="button" onClick={() => goToLeaguersSignup(navigate)}>
+                        {(userRole === 'admin' || userRole === 'mentor') ? <li><Button type="button" onClick={() => goToLeaguersSignup(navigate)}>
                         <Icons><FiUserPlus style={{fontSize:50}}/>Cadastrar Leaguers</Icons></Button>
                         </li> : <></>}
                         {userRole === 'admin' ? <li><Button type='button' onClick={() => goToColaboratorsList(navigate)}>
