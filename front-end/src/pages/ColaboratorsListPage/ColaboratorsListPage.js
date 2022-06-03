@@ -4,7 +4,7 @@ import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
 import { goBack, goToSingUp } from "../../routes/coordinator";
 import UserCard from "../../Components/UserCard/UserCard"
-import {Header,Button,Container,H1} from "./styled";
+import { Header, Button, H1, Container,Ul,Btn } from "./styled";
 
 
 
@@ -34,19 +34,22 @@ const ColaboratorsListPage = () => {
 
     return (
         <>
-            
+
             <Header>
                 <H1>Colaboradores</H1>
                 <Button type="button" onClick={() => goBack(navigate)}>{'Back'}</Button>
-                
+
             </Header>
             <Container>
-            <button type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</button>
-            <input type={'text'} placeholder="Usuários" value={input} onChange={onChangeInput}></input>
-            <main>
-                <ul>{!input ? <p>Buscar por usuários</p> : mountUsers.length === 0 ? <p>Não encontrado 😕</p> : mountUsers}</ul>
-            </main>
+                <Ul>
+                    <Btn type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</Btn>
+                    <main>
+                        <ul>{!input ? <p>Buscar por usuários</p> : mountUsers.length === 0 ? <p>Não encontrado 😕</p> : mountUsers}</ul>
+                    </main>
+                    <input type={'text'} placeholder="Usuários" value={input} onChange={onChangeInput}></input>
+                </Ul>
             </Container>
+
         </>
     );
 };

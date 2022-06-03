@@ -101,7 +101,7 @@ const GlobalState = (props) => {
 
     const getLeaguers = async () => {
         const res = await makeRequest('get', `${base_URL}leaguers`, header);
-
+        console.log(res)
         setLeaguers(res.leaguers);
     };
 
