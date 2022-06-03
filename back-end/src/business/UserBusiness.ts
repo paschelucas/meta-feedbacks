@@ -56,7 +56,7 @@ export default class UserBusiness {
       if (!isPasswordValid) {
         throw new CustomError(
           422,
-          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula, uma minúscula e pelo menos um dos seguintes caracteres especiais: '$', '*', '&', '@' e/ou '#'."
+          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula, uma maiúscula e pelo menos um dos seguintes caracteres especiais: '$', '*', '&', '@' e/ou '#'."
         );
       }
 
@@ -152,6 +152,10 @@ export default class UserBusiness {
         throw new CustomError(422, "Favor preencher todos os campos.");
       }
 
+      if(newRole !== 'admin' && newRole !== 'mentor' && newRole !== 'gestor'){
+        throw new CustomError(422, "Tipo de usuário inválido.");
+      }
+
       const tokenData = this.authenticator.getTokenData(token);
 
       if (!tokenData) {
@@ -185,17 +189,6 @@ export default class UserBusiness {
         throw new CustomError(422, "Favor informar email e senha provisória.");
       }
 
-      const validPasswordVerifier: RegExp =
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{9,}$/;
-      const isPasswordValid = validPasswordVerifier.test(new_password);
-
-      if (!isPasswordValid) {
-        throw new CustomError(
-          422,
-          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
-        );
-      }
-
       const [registeredUser, hashPassword] = await Promise.all([
         this.userDatabase.getUserByEmail(email),
         this.hashManager.hash(new_password),
@@ -212,6 +205,17 @@ export default class UserBusiness {
 
       if (!passwordIsCorrect) {
         throw new CustomError(403, "Email ou senha provisória incorretos.");
+      }
+
+      const validPasswordVerifier: RegExp =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{9,}$/;
+      const isPasswordValid = validPasswordVerifier.test(new_password);
+
+      if (!isPasswordValid) {
+        throw new CustomError(
+          422,
+          "Senhas devem ter pelo menos 9 caracteres, conter um dígito, uma letra minúscula e uma maiúscula."
+        );
       }
 
       const role = registeredUser.user_role;

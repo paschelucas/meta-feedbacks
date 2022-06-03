@@ -15,9 +15,9 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  getAllUsers = async () => {
+  getAllUsers = async (): Promise<FindUserResponse> => {
     try {
-      const result: FindUserResponse = await this.connection(this.TABLE_NAME)
+      const result = await this.connection(this.TABLE_NAME)
       .select("user_id", "user_name", "user_email", "user_role")
       return result;
 
@@ -39,7 +39,7 @@ export default class UserDatabase extends BaseDatabase {
 
   getUserById = async (id: string) => {
     try {
-      const [queryResult] = await this.connection(this.TABLE_NAME)
+      const [queryResult]: FindUserResponse = await this.connection(this.TABLE_NAME)
         .select("*")
         .where("user_id", id);
       return queryResult;
@@ -50,24 +50,24 @@ export default class UserDatabase extends BaseDatabase {
 
   getUserByName = async (name: string) => {
     try {
-      const queryResult: FindUserResponse = await this.connection(
+      const [queryResult]: FindUserResponse = await this.connection(
         this.TABLE_NAME
       )
         .select("*")
         .where({ user_name: name });
-      return queryResult[0];
+      return queryResult;
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
   };
 
-  editUserRole = async (input: EditRoleInputDTO) => {
+  editUserRole = async (input: EditRoleInputDTO): Promise<FindUserResponse> => {
     try {
       const result = await this.connection(this.TABLE_NAME)
       .update({user_role: input.newRole})
       .where({user_name: input.userName})
 
-      const alteredUser: FindUserResponse = await this.connection(this.TABLE_NAME)
+      const alteredUser = await this.connection(this.TABLE_NAME)
       .select("user_id", "user_name", "user_email", "user_role")
       .where({user_name: input.userName})
 
@@ -78,7 +78,7 @@ export default class UserDatabase extends BaseDatabase {
     }
   };
 
-  editPassword = async (input: EditPasswordInputDTO) => {
+  editPassword = async (input: EditPasswordInputDTO): Promise<void> => {
     try {
       const result = await this.connection(this.TABLE_NAME)
       .update({user_password: input.new_password})

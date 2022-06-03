@@ -69,13 +69,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmIt
 
 POST http://localhost:3003/leaguers/create
 Content-Type: application/json
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1MzU5MDkwOCwiZXhwIjoxNjUzNTkyNzA4fQ.O0v-9HZtzKlNnBZsyMgPOOddrWVHNqIj35EUqziG0jE
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDE4NDg4NiwiZXhwIjoxNjU0MTkyMDg2fQ.SvbzMygC0uwfI_Ni5bOZKspLs-etcDyhHRdTykHcWww
 
 {
-    "name": "Teste3",
-    "turma": "turma-2",
-    "fase": "labs",
-    "responsavel": "Teste3"
+    "name": "Teste2",
+    "turma": "turma-piloto",
+    "fase": "introducao",
+    "responsavel": "Teste2"
 }
 
 ###
@@ -127,14 +127,14 @@ Content-Type: application/json
 
 PUT http://localhost:3003/leaguers/edit
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDEzNzIzMCwiZXhwIjoxNjU0MTQ0NDMwfQ.N08cSeSa-uJy1ZWcphHHfa7-nfAPja0D7YRZFnScr1A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkOWI2OTMzLTcxZmItNGM5Mi1iYzVhLTFmZDRmOTliNDgzNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1NDIwMDA5NywiZXhwIjoxNjU0MjA3Mjk3fQ.ODMwnCln_VAsJVEx5zbZWRfnCxGK_zTscJKNQLqSXF0
 
 {
-    "id": "2516189c-c4af-4b7f-8259-d6f215720310",
+    "id": "1b3f4edf-35a6-4821-ac8c-da0079bfa34c",
     "name": "Teste3",
     "turma": "turma-2",
     "fase": "introducao",
-    "responsavel": "Teste"
+    "responsavel": "Teste3"
 }
 
 ###

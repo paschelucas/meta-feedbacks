@@ -129,15 +129,15 @@ export default class LeaguerBusiness {
     try {
       const { leaguerId, newFase } = input;
 
+      if (!leaguerId || !newFase) {
+        throw new CustomError(
+          422,
+          "Favor informar id do leaguer e fase atualizada."
+        );
+      }
+
     if (newFase !== "introducao" && newFase !== "labs" && newFase !== "beta") {
       throw new CustomError(422, "Tipo de fase inválido.");
-    }
-
-    if (!leaguerId || !newFase) {
-      throw new CustomError(
-        422,
-        "Favor informar id do leaguer e fase atualizada."
-      );
     }
 
     const tokenData = this.authenticator.getTokenData(token);
