@@ -8,22 +8,21 @@ import { Header, Button, H1, Container,Ul,Btn } from "./styled";
 
 
 
-const ColaboratorsListPage = () => {
+const CollaboratorsListPage = () => {
     useUnprotectedPage();
 
     const navigate = useNavigate();
-    const { users, getUsers } = useContext(GlobalContext);
-    const [input, setInput] = useState("");
+    const { users, getUsers, searchInput, onChangeSearch } = useContext(GlobalContext);
 
     useEffect(() => {
         getUsers();
     }, []);
 
-    const onChangeInput = (event) => {
-        setInput(event.target.value);
-    }
-
-    const mountUsers = users.map((user) => {
+    const mountUsers = users.filter((user) => {
+        if (user.user_name.toLowerCase().includes(searchInput)) {
+            return user;
+        }  
+     }).map((user) => {
         return (
             <>
                 <hr />
@@ -44,13 +43,13 @@ const ColaboratorsListPage = () => {
                 <Ul>
                     <Btn type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</Btn>
                     <main>
-                        <ul>{!input ? <p>Buscar por usuários</p> : mountUsers.length === 0 ? <p>Não encontrado 😕</p> : mountUsers}</ul>
+                    <input type={'text'} placeholder="Usuários" value={searchInput} onChange={onChangeSearch}></input>
+                        <ul>{mountUsers}</ul>
                     </main>
-                    <input type={'text'} placeholder="Usuários" value={input} onChange={onChangeInput}></input>
                 </Ul>
             </Container>
 
         </>
     );
 };
-export default ColaboratorsListPage;
+export default CollaboratorsListPage;

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { goToLogin } from "../routes/coordinator";
 
@@ -6,8 +7,10 @@ const useUnprotectedPage = () => {
 
     const token = localStorage.getItem('token');
 
-    if (!token) {
-        goToLogin(navigate);
-    }
+    useEffect(() => {
+        if (!token) {
+            goToLogin(navigate);
+        }
+    }, []);
 };
 export default useUnprotectedPage;

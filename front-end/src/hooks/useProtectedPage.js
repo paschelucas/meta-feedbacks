@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { goToMenu } from "../routes/coordinator";
 
@@ -6,8 +7,10 @@ const useProtectedPage = () => {
 
     const token = localStorage.getItem('token');
 
-    if (token) {
-        goToMenu(navigate);
-    }
+    useEffect(() => {
+        if (token) {
+            goToMenu(navigate);
+        }
+    },[]);
 };
 export default useProtectedPage;

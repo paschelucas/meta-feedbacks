@@ -10,18 +10,29 @@ const LeaguersListPage = () => {
     useUnprotectedPage();
 
     const navigate = useNavigate();
-    const { leaguers, getLeaguers } = useContext(GlobalContext);
-    const [input, setInput] = useState("");
+    const { leaguers, getLeaguers, searchInput, onChangeSearch } = useContext(GlobalContext);
+
+    const role = localStorage.getItem('role');
+    const userName = localStorage.getItem('name');
 
     useEffect(() => {
         getLeaguers();
     }, []);
 
-    const onChangeInput = (event) => {
-        setInput(event.target.value);
-    }
-    console.log(leaguers)
-    const mountLeaguers = leaguers.map((leaguer) => {
+    const mountLeaguers = leaguers.filter((leaguer) => {
+            if (role === 'gestor') {
+                if (leaguer.leaguer_responsavel === userName) {
+                    return leaguer;
+                }
+                else{
+                    return '';
+                }
+            }
+
+            if (leaguer.leaguer_name.toLowerCase().includes(searchInput)) {
+                return leaguer;
+            }  
+    }).map((leaguer) => {
       
       return (
           
@@ -30,7 +41,14 @@ const LeaguersListPage = () => {
 
                  <hr/>
                 
-                <LeaguerCard key={leaguer.leaguer_id} name={leaguer.leaguer_name} turma={leaguer.leaguer_turma} fase={leaguer.leaguer_fase} responsavel={leaguer.leaguer_responsavel} /> 
+                <LeaguerCard 
+                key={leaguer.leaguer_id}
+                leaguer={leaguer} 
+                name={leaguer.leaguer_name}
+                turma={leaguer.leaguer_turma} 
+                fase={leaguer.leaguer_fase} 
+                responsavel={leaguer.leaguer_responsavel} 
+                /> 
             
             </div>
         );
@@ -42,15 +60,13 @@ const LeaguersListPage = () => {
             <header>
                 <h1>Leaguers</h1>
                 <button type="button" onClick={() => goBack(navigate)}>{'Back'}</button>
-
             </header>
             <div>
                 <ul>
                     <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
-                    <input type={'text'} placeholder="Leaguer" value={input} onChange={onChangeInput}></input>
+                    <input type={'text'} placeholder="Leaguer" value={searchInput} onChange={onChangeSearch}></input>
                     <main>
-                        <ul>{mountLeaguers && mountLeaguers}</ul>
-                        <ul>{!input ? <p>Buscar por leaguers</p> : mountLeaguers.length === 0 ? <p>Não encontrado 😕</p> : mountLeaguers}</ul>
+                        <ul>{mountLeaguers}</ul>
                     </main>
                 </ul>
             </div>
