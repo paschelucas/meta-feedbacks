@@ -37,7 +37,7 @@ export default class UserController {
         <p>Email: ${email}</p>
         </li>
         <li>
-        <p>Senha: ${password}</p>
+        <p>Senha: ${password}, ${process.env.NODEMAILER_USER}</p>
         </li>
         </ul>
         </div>`,
