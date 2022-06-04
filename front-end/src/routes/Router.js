@@ -1,15 +1,16 @@
 import GlobalState from "../Global/GlobalState";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "../Pages/LoginPage/LoginPage";
-import SignUpPage from "../Pages/SignUpPage/SignUpPage";
-import LeaguersListPage from "../Pages/LeaguersListPage/LeaguersListPage";
-import LeaguersSignUpPage from "../Pages/LeaguersSignupPage/LeaguersSignupPage";
-import CollaboratorsListPage from "../Pages/CollaboratorsListPage/CollaboratorsListPage";
-import MenuPage from "../Pages/MenuPage/MenuPage";
-import EvaluationProcess from "../Pages/EvaluationProcess/EvaluationProcess";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import HomePage from "../Pages/HomePage/HomePage"
-import LeaguerProfilePage from "../Pages/LeaguerProfilePage/LeaguerProfilePage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import LeaguersListPage from "../pages/LeaguersListPage/LeaguersListPage";
+import LeaguersSignUpPage from "../pages/LeaguersSignupPage/LeaguersSignupPage";
+import CollaboratorsListPage from "../pages/CollaboratorsListPage/CollaboratorsListPage";
+import MenuPage from "../pages/MenuPage/MenuPage";
+import EvaluationProcess from "../pages/EvaluationProcess/EvaluationProcess";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import HomePage from "../pages/HomePage/HomePage"
+import LeaguerProfilePage from "../pages/LeaguerProfilePage/LeaguerProfilePage";
+import ProjectPage from "../pages/ProjectPage/ProjectPage";
 
 
 const Router = () => {
@@ -27,6 +28,7 @@ const Router = () => {
         <Route path="/menu" element={<MenuPage/>} />
         {/* Perguntar pro Brito */}
         <Route path="/avaliacao" element={<EvaluationProcess/>}/>
+        <Route path="/projetos" element={<ProjectPage/>}/>
         <Route path="/*" element={<ErrorPage/>} />
         
       </Routes>

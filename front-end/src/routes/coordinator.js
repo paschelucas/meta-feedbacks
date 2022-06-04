@@ -37,3 +37,7 @@ export const goToColaboratorsList = (Navigate) => {
 export const goToEvaluationProcess = (Navigate) => {
   Navigate("/avaliacao")
 };
+
+export const goToProjetc = (Navigate) => {
+  Navigate("/projetos")
+};
