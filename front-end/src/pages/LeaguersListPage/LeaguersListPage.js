@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
-import { goBack,goToLeaguersSignup } from "../../routes/coordinator";
+import { goBack, goToLeaguersSignup } from "../../routes/coordinator";
 import LeaguerCard from "../../Components/LeaguerCard/LeaguerCard";
-
+import { Main,Header,H1,Button } from './styled'
 
 const LeaguersListPage = () => {
     useUnprotectedPage();
@@ -20,54 +20,47 @@ const LeaguersListPage = () => {
     }, []);
 
     const mountLeaguers = leaguers.filter((leaguer) => {
-            if (role === 'gestor') {
-                if (leaguer.leaguer_responsavel === userName) {
-                    return leaguer;
-                }
-                else{
-                    return '';
-                }
-            }
-
-            if (leaguer.leaguer_name.toLowerCase().includes(searchInput)) {
+        if (role === 'gestor') {
+            if (leaguer.leaguer_responsavel === userName) {
                 return leaguer;
-            }  
+            }
+            else {
+                return '';
+            }
+        }
+
+        if (leaguer.leaguer_name.toLowerCase().includes(searchInput)) {
+            return leaguer;
+        }
     }).map((leaguer) => {
-      
-      return (
-          
 
-            <div key={leaguer.leaguer_id}>
+        return (
 
-                 <hr/>
-                
-                <LeaguerCard 
+            <LeaguerCard
                 key={leaguer.leaguer_id}
-                leaguer={leaguer} 
+                leaguer={leaguer}
                 name={leaguer.leaguer_name}
-                turma={leaguer.leaguer_turma} 
-                fase={leaguer.leaguer_fase} 
-                responsavel={leaguer.leaguer_responsavel} 
-                /> 
-            
-            </div>
+                turma={leaguer.leaguer_turma}
+                fase={leaguer.leaguer_fase}
+                responsavel={leaguer.leaguer_responsavel}
+            />
         );
     });
 
     return (
         <>
 
-            <header>
-                <h1>Leaguers</h1>
-                <button type="button" onClick={() => goBack(navigate)}>{'Back'}</button>
-            </header>
+            <Header>
+                <H1>Leaguers</H1>
+                <Button type="button" onClick={() => goBack(navigate)}>{'Back'}</Button>
+            </Header>
             <div>
                 <ul>
                     <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
                     <input type={'text'} placeholder="Leaguer" value={searchInput} onChange={onChangeSearch}></input>
-                    <main>
+                    <Main>
                         <ul>{mountLeaguers}</ul>
-                    </main>
+                    </Main>
                 </ul>
             </div>
 

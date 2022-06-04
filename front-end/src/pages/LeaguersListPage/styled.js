@@ -1,5 +1,21 @@
 import styled from "styled-components"
 
+export const Header = styled.header`
+display:flex;
+width:100vw;
+height:11vh;
+background-color:#122870;
+box-shadow:  15px 15px 30px #7d7d7d,-15px -15px 30px #ffffff;
+`
+export const H1 = styled.h1`
+    display:flex;
+    align-items:center;
+    font-family: 'Open Sans', sans-serif;
+    font-size:1.5rem;
+    color:#fff;
+    margin-left:15px;
+
+`
 export const Input = styled.input`
     width:15vw;
     border-radius:3px;
@@ -30,25 +46,20 @@ and (max-width : 800px) {
 
 `
 export const Button = styled.button`
-    width:16.5vw;
-    height: 4rem;
-    border-radius:3px;
-    color:#ffff;
-    background-color:#122870;
-    transition: 0.3s;
-    border-radius:3px;
-    border:transparent;
-    padding: 8px;
-    font-size: 1.5rem;
+    display:flex;
+    margin-left:84vw;
+    align-items:center;
+    background-color:transparent;
+    color:white;
+    border:none;
+    font-family: 'Open Sans', sans-serif;
+    font-size:1rem;
 
+    :hover{
+        font-weight:bold;
+        cursor:pointer;
+    }
 
-:hover{
-    color:#ffff;
-    font-weight:bold;
-    background-color:#007bff;;
-    cursor: pointer;
-
-}
 
 @media screen and (min-width : 320px) and
     (max-width : 480px) {
@@ -74,4 +85,20 @@ and (max-width : 800px) {
     border:transparent;
     padding: 8px;
 }
+`
+export const Main = styled.main`
+  margin-top:25px;
+  border-radius: 10px;
+  border:transparent;
+  background: #e0e0e0;
+  box-shadow:29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;  
+    ul{
+  display:grid;    
+  grid-template-columns:repeat(4, minmax(100px, 1fr));
+  column-gap: 2rem ;
+  row-gap: 4rem ;
+  
+  }  
+   
+      
 `
