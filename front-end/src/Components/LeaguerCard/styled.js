@@ -16,17 +16,16 @@ export const Logo = styled.img`
 export const Main = styled.main`
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   margin: 20px;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 `
 
 export const ConteinerCard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
-  column-gap: 3rem ;
-  row-gap: 4rem ;
+  display:flex;
+  background-color:red; 
+    
 `
 
 export const Card = styled.div`
@@ -36,7 +35,8 @@ export const Card = styled.div`
   align-items: center;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
+ 
+  
 `
 
 export const ImgCard = styled.img`
@@ -48,8 +48,9 @@ export const ImgCard = styled.img`
 
 export const CardInfo = styled.div`
   display: flex;
+  width:250px;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
-  padding: 10px 10px 10px 25px;
+  padding: 10px 10px 10px 20px;
 `

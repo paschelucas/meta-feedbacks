@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { goBack } from "../../routes/coordinator";
-import { Header,Main,H1,Form,Button,H4,Span,Btn} from "./styled";
+import { Header,Main,H1,Form,Button,H4,Span,Btn,Input,Select} from "./styled";
 
 
 const LeaguersSignUpPage = () => {
@@ -36,20 +36,20 @@ const LeaguersSignUpPage = () => {
             <Span>
               <H4>Cadastrar Leaguer</H4>
             </Span>
-            <input {...register("name", { required: "Precisa ter um nome" })} type="text" placeholder="Name" />
+            <Input {...register("name", { required: "Precisa ter um nome" })} type="text" placeholder="Name" />
             {errors ? <p>{errors.name?.message}</p> : <></>}
-            <input {...register("turma", { required: "Precisa ter uma turma" })} type="text" placeholder="Turma" />
+            <Input {...register("turma", { required: "Precisa ter uma turma" })} type="text" placeholder="Turma" />
             {errors ? <p>{errors.turma?.message}</p> : <></>}
-            <select {...register('fase')}>
+            <Select {...register('fase')}>
               <option value="">Fase</option>
               <option value="introducao">Introdução</option>
               <option value="labs">Labs</option>
               <option value="beta">Beta</option>
-            </select>
-            <select {...register("responsavel", { required: "Precisa ter um responsável" })}>
+            </Select>
+            <Select {...register("responsavel", { required: "Precisa ter um responsável" })}>
               <option value="">Responsável</option>
               {responsibles}
-            </select>
+            </Select>
 
             <Btn type="submit">Fazer cadastro</Btn>
           </Form>
