@@ -18,6 +18,7 @@ const GlobalState = (props) => {
     const [leaguers, setLeaguers] = useState([]);
     const [users, setUsers] = useState([]);
     const [searchInput, setSearchInput] = useState("");
+    const [projects, setProjects] = useState([]);
     
     // user info
     const userRole = localStorage.getItem('role');
@@ -109,6 +110,11 @@ const GlobalState = (props) => {
         goToLeaguerProfile(navigate);
     };
 
+    const getProjects = async () => {
+        const res = await makeRequest('get', `${base_URL}project/`,header);
+        setProjects(res.projects);
+    };
+
     // Other functions
     const onChangeSearch = (evt) => {
         setSearchInput(evt.target.value);
@@ -131,7 +137,9 @@ const GlobalState = (props) => {
         getUsers,
         leaguers,
         users,
-        editUserRole
+        editUserRole,
+        getProjects,
+        projects
     };
     
     return (

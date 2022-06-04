@@ -3,7 +3,7 @@ import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
 import { goBack, goToSingUp } from "../../routes/coordinator";
-import UserCard from "../../Components/UserCard/UserCard"
+import UserCard from "../../components/UserCard/UserCard"
 import { Header, Button, H1, Container,Ul,Btn } from "./styled";
 
 
