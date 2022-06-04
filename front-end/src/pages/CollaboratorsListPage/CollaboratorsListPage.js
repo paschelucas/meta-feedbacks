@@ -16,7 +16,7 @@ const CollaboratorsListPage = () => {
 
     useEffect(() => {
         getUsers();
-    }, []);
+    }, [users]);
 
     const mountUsers = users.filter((user) => {
         if (user.user_name.toLowerCase().includes(searchInput)) {
@@ -24,10 +24,7 @@ const CollaboratorsListPage = () => {
         }  
      }).map((user) => {
         return (
-            <>
-                <hr />
-                <UserCard key={user.user_id} name={user.user_name} email={user.user_email} role={user.user_role} />
-            </>
+            <UserCard key={user.user_id} name={user.user_name} email={user.user_email} role={user.user_role} />
         );
     });
 
@@ -43,7 +40,7 @@ const CollaboratorsListPage = () => {
                 <Ul>
                     <Btn type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</Btn>
                     <main>
-                    <input type={'text'} placeholder="Usuários" value={searchInput} onChange={onChangeSearch}></input>
+                    <input type={'text'} placeholder="Colaboradores" value={searchInput} onChange={onChangeSearch}></input>
                         <ul>{mountUsers}</ul>
                     </main>
                 </Ul>

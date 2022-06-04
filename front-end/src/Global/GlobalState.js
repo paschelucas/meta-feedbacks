@@ -18,7 +18,7 @@ const GlobalState = (props) => {
     const [leaguers, setLeaguers] = useState([]);
     const [users, setUsers] = useState([]);
     const [searchInput, setSearchInput] = useState("");
-    const [projects, setProjects] = useState("")
+    const [projects, setProjects] = useState([]);
     
     // user info
     const userRole = localStorage.getItem('role');
@@ -110,14 +110,30 @@ const GlobalState = (props) => {
         goToLeaguerProfile(navigate);
     };
 
+    // Other functions
+    const onChangeSearch = (evt) => {
+        setSearchInput(evt.target.value);
+    };
+    
     const getProjects = async () => {
         const res = await makeRequest('get', `${base_URL}project/`,header);
         setProjects(res.projects);
     };
 
-    // Other functions
-    const onChangeSearch = (evt) => {
-        setSearchInput(evt.target.value);
+    const addLeaguerInProject = async (data, userId, close) => {
+        const res = await makeRequest('post', `${base_URL}projects-and-leaguers/${data.project}/insert`, {leaguerId: userId}, header);
+
+        console.log(res);
+
+        close();
+    };
+
+    const createNewProject = async (data, close) => {
+        const res = await makeRequest('post', `${base_URL}project/create`, data, header);
+
+        setMessage(res.message);
+
+        close();
     };
 
     const value = { 
@@ -139,7 +155,9 @@ const GlobalState = (props) => {
         users,
         editUserRole,
         getProjects,
-        projects
+        projects,
+        addLeaguerInProject,
+        createNewProject
     };
     
     return (

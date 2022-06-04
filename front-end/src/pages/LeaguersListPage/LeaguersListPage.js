@@ -19,13 +19,14 @@ const LeaguersListPage = () => {
         getLeaguers();
     }, []);
 
-    const mountLeaguers = leaguers.filter((leaguer) => {
-        if (role === 'gestor') {
-            if (leaguer.leaguer_responsavel === userName) {
-                return leaguer;
-            }
-            else {
-                return '';
+    const mountLeaguers = leaguers?.filter((leaguer) => {
+            if (role === 'gestor') {
+                if (leaguer.leaguer_responsavel === userName) {
+                    return leaguer;
+                }
+                else{
+                    return '';
+                }
             }
         }
 
