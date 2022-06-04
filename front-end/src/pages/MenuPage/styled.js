@@ -51,7 +51,7 @@ export const Ul = styled.ul`
 export const Logout = styled.div`
 display:flex;
 float: right;
-margin-right:20px;
+margin-right:30px;
 margin-top:15px;
 `
 export const Header = styled.header`
@@ -98,7 +98,7 @@ font-family: 'Open Sans', sans-serif;
 margin-left:25px;
 `
 export const ButtonLogout = styled.button`
-    margin-right:50px;
+    float:right;
     background-color:transparent;
     color:white;
     border:none;

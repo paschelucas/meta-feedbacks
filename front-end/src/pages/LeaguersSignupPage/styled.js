@@ -78,8 +78,11 @@ export const Form = styled.form`
     height:50vh;
     width:30vw;
     margin:25px;
-    border-radius: 10px;
-    border:transparent;
-    background: #e0e0e0;
-    box-shadow:29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff; 
+     
  `
+export const Input = styled.input`
+    margin:5px;
+`
+export const Select = styled.select`
+    margin:5px;
+`
