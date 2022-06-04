@@ -3,27 +3,30 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import { goBack } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
+import ProjectCard from "../../components/ProjectCard.js/ProjectCard";
+import Popup from "reactjs-popup";
+import { useForm } from "react-hook-form";
 
 const ProjectPage = () => {
   useUnprotectedPage();
 
   const navigate = useNavigate();
-  const { projects, getProjects, searchInput, onChangeSearch } = useContext(GlobalContext);
+  const { projects, getProjects, searchInput, onChangeSearch, createNewProject } = useContext(GlobalContext);
+  const {handleSubmit, register} = useForm();
+
+  const userRole = localStorage.getItem('role');
 
   useEffect(() => {
       getProjects();
-  }, []);
+  }, [projects]);
 
-  const mountProjects = projects.filter((project) => {
+  const mountProjects = projects?.filter((project) => {
       if (project.project_name.toLowerCase().includes(searchInput)) {
           return project;
       }  
    }).map((project) => {
       return (
-          <>
-              <hr />
-              <div key={project.project_id} name={project.project_name}/>
-          </>
+              <ProjectCard key={project.project_id} name={project.project_name}/>
       );
   });
   
@@ -31,8 +34,18 @@ const ProjectPage = () => {
       <>
 
           <header>
+              <h1>Projetos</h1>
               <button type="button" onClick={() => goBack(navigate)}>{'Back'}</button>
 
+              {userRole === 'admin' ? <Popup trigger={<button type="button">Criar novo projeto</button>} position="right center">
+                    {close => (
+                        <form onSubmit={handleSubmit((data) => createNewProject(data, close))}>
+                            <input type="text" placeholder="Insira o nome do projeto"
+                            {...register('name')}/>
+                            <button type="submit">Criar</button>
+                        </form>
+                    )}
+              </Popup> : <></>}
           </header>
           <div>
               <ul>
