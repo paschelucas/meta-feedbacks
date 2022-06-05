@@ -76,8 +76,11 @@ export const Form = styled.form`
     justify-content:center;
     align-items:center;
     height:50vh;
-    width:30vw;
+    width:40vw;
     margin:25px;
+    border-radius: 10px;
+    background: #e0e0e0;
+    box-shadow:  24px 24px 49px #bebebe,-24px -24px 49px #ffffff;
      
  `
 export const Input = styled.input`

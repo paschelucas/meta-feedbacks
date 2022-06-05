@@ -55,8 +55,8 @@ export const Container = styled.div`
    width:80vw;
    height:70vh;
    border-radius: 5px;
-    background: #e0e0e0;
-    box-shadow:31px 31px 32px #bebebe,-31px -31px 32px #ffffff;
+   background: #e0e0e0;
+   box-shadow:31px 31px 32px #bebebe,-31px -31px 32px #ffffff;
      
   `
   export const Ul = styled.ul`
@@ -65,13 +65,18 @@ export const Container = styled.div`
   margin-top:15px;
   margin-left:15px;
     
+  input{
+      width:240px;
+  }
  `
  export const Btn = styled.button`
  display:flex;
+ width:250px;
  justify-content:center;
  margin-top:15px;
+ margin: 5px 0;
  font-family: 'Open Sans', sans-serif;
- font-size:1rem;
+ font-size:15px;
  color:#fff;
  background-color:#122870;
  border-radius:5px;

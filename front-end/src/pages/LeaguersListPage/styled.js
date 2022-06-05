@@ -17,7 +17,7 @@ export const H1 = styled.h1`
 
 `
 export const Input = styled.input`
-    width:15vw;
+    width:10vw;
     border-radius:3px;
     border-color:#636B6F;
     padding: 10px;
@@ -91,14 +91,16 @@ export const Main = styled.main`
   border-radius: 10px;
   border:transparent;
   background: #e0e0e0;
-  box-shadow:29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;  
-    ul{
+  box-shadow:29px 29px 51px #a6a6a6,-29px -29px 51px #ffffff;
+    
+ul{
   display:grid;    
   grid-template-columns:repeat(4, minmax(100px, 1fr));
   column-gap: 2rem ;
   row-gap: 4rem ;
-  
-  }  
-   
-      
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow:  24px 24px 49px #bebebe,-24px -24px 49px #ffffff;
+  }       
 `
+

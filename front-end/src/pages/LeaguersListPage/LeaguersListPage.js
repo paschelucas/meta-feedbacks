@@ -3,8 +3,8 @@ import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
 import { goBack, goToLeaguersSignup } from "../../routes/coordinator";
-import LeaguerCard from "../../Components/LeaguerCard/LeaguerCard";
-import { Main,Header,H1,Button } from './styled'
+import LeaguerCard from "../../components/LeaguerCard/LeaguerCard";
+import { Main,Header,H1,Button,} from './styled'
 
 const LeaguersListPage = () => {
     useUnprotectedPage();
@@ -28,12 +28,12 @@ const LeaguersListPage = () => {
                     return '';
                 }
             }
+            if (leaguer.leaguer_name.toLowerCase().includes(searchInput)) {
+                return leaguer;
+            }
         }
 
-        if (leaguer.leaguer_name.toLowerCase().includes(searchInput)) {
-            return leaguer;
-        }
-    }).map((leaguer) => {
+    ).map((leaguer) => {
 
         return (
 
@@ -57,8 +57,8 @@ const LeaguersListPage = () => {
             </Header>
             <div>
                 <ul>
-                    <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
                     <input type={'text'} placeholder="Leaguer" value={searchInput} onChange={onChangeSearch}></input>
+                    <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
                     <Main>
                         <ul>{mountLeaguers}</ul>
                     </Main>

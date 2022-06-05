@@ -23,21 +23,15 @@ export const Main = styled.main`
 `
 
 export const ConteinerCard = styled.div`
+  
+  
+`
+
+export const Card = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(100px, 2fr));
   column-gap: 2rem ;
   row-gap: 4rem ;
-  background-color:red;
-`
-
-export const Card = styled.div`
-  display: flex;
-  border-radius: 8px;
-  background-color: #FFFFFF;
-  align-items: center;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
 `
 
 export const ImgCard = styled.img`

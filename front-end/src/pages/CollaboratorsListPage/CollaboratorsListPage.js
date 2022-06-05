@@ -38,9 +38,9 @@ const CollaboratorsListPage = () => {
             </Header>
             <Container>
                 <Ul>
-                    <Btn type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</Btn>
                     <main>
                     <input type={'text'} placeholder="Colaboradores" value={searchInput} onChange={onChangeSearch}></input>
+                    <Btn type="button" onClick={() => goToSingUp(navigate)}>Cadastrar novo colaborador</Btn>
                         <ul>{mountUsers}</ul>
                     </main>
                 </Ul>
