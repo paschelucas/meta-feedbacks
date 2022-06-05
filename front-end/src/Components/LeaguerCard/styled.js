@@ -55,9 +55,9 @@ export const CardInfo = styled.div`
   height:90px;
   flex-direction: column;
   flex-wrap: nowrap;
-  /* border-radius:5px;
+  border-radius:5px;
   -webkit-box-shadow: 5px 5px 15px 5px #000000; 
-  box-shadow: 5px 5px 15px 5px #000000; */
+  box-shadow: 5px 5px 15px 5px #000000; 
   h4{
     
     color:#4066EB;

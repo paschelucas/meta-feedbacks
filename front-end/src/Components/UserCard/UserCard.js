@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Popup from "reactjs-popup";
 import GlobalContext from "../../Global/GlobalContext";
+import {Card} from "./styled"
+
 
 const UserCard = (props) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {editUserRole} = useContext(GlobalContext);
 
     return (
+        <Card>
         <li key={props.id}>
             <hr />
             <p>{props.name}</p>
@@ -26,6 +29,8 @@ const UserCard = (props) => {
                 )}
             </Popup>
         </li>
+        </Card>
+        
     );
 };
 export default UserCard;

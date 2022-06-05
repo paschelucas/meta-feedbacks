@@ -4,7 +4,7 @@ import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
 import { goBack, goToLeaguersSignup } from "../../routes/coordinator";
 import LeaguerCard from "../../components/LeaguerCard/LeaguerCard";
-import { Main,Header,H1,Button } from './styled'
+import { Main,Header,H1,Button,} from './styled'
 
 const LeaguersListPage = () => {
     useUnprotectedPage();
@@ -57,8 +57,8 @@ const LeaguersListPage = () => {
             </Header>
             <div>
                 <ul>
-                    <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
                     <input type={'text'} placeholder="Leaguer" value={searchInput} onChange={onChangeSearch}></input>
+                    <button type="button" onClick={() => goToLeaguersSignup(navigate)}>Cadastrar novo leaguer</button>
                     <Main>
                         <ul>{mountLeaguers}</ul>
                     </Main>
