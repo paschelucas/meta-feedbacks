@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { goBack } from "../../routes/coordinator";
-import { Header,Main,H1,Form,Button,H4,Span,Btn,Input,Select} from "./styled";
+import { Header,Main,H1,Form,Button,H4,Btn,Input,Select} from "./styled";
 
 
 const LeaguersSignUpPage = () => {
@@ -33,9 +33,9 @@ const LeaguersSignUpPage = () => {
         </Header>
         <Main>
           <Form onSubmit={handleSubmit(leaguersSignup)}>
-            <Span>
+          
               <H4>Cadastrar Leaguer</H4>
-            </Span>
+        
             <Input {...register("name", { required: "Precisa ter um nome" })} type="text" placeholder="Name" />
             {errors ? <p>{errors.name?.message}</p> : <></>}
             <Input {...register("turma", { required: "Precisa ter uma turma" })} type="text" placeholder="Turma" />
