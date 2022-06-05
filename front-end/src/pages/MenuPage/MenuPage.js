@@ -39,9 +39,9 @@ const MenuPage = () => {useUnprotectedPage();
                         <Icons><FiUserPlus style={{fontSize:50}}/>Cadastrar Leaguers</Icons></Button>
                         </li> : <></>}
                         {userRole === 'admin' ? <li><Button type='button' onClick={() => goToColaboratorsList(navigate)}>
-                        <Icons><RiUserSettingsLine style={{fontSize:50}}/>Editar colaborador</Icons></Button></li> : <></>}
+                        <Icons><RiUserSettingsLine style={{fontSize:50}}/>Colaboradores</Icons></Button></li> : <></>}
                         <li><Button type='button' onClick={() => goToProjetc(navigate)}>
-                        <Icons><FiUserCheck style={{fontSize:50}}/>Editar Projeto</Icons></Button></li><></>
+                        <Icons><FiUserCheck style={{fontSize:50}}/>Projetos</Icons></Button></li><></>
                     </Ul>
                 </Container>
             </main>

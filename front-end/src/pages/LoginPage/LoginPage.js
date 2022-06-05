@@ -27,7 +27,7 @@ const LoginPage = () => {
         {errors ? <p>{errors.email?.message}</p> : <></>}
         <Input {...register("password", {required: "Senha incorreta"})} type="password" placeholder="digite sua senha"/>
         {errors ? <p>{errors.password?.message}</p> : <></>}
-        <Button type="submit">{isLoading ? <CircularProgress sx={'color: white; width: 2px'}/> : 'ENTRAR'}</Button>
+        <Button type="submit">{isLoading ? <CircularProgress sx={{color: 'white', width: '2px'}}/> : 'ENTRAR'}</Button>
       </form>
      </ContainerLogin>
     </div>

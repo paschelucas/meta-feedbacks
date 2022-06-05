@@ -19,6 +19,7 @@ const GlobalState = (props) => {
     const [users, setUsers] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     const [projects, setProjects] = useState([]);
+    const [questions, setQuestions] = useState([]);
     
     // user info
     const userRole = localStorage.getItem('role');
@@ -136,6 +137,17 @@ const GlobalState = (props) => {
         close();
     };
 
+    const getQuestions = async () => {
+        const res = await makeRequest('get', `${base_URL}question`, header);
+
+        setQuestions(res.questions);
+    };
+
+    const sendChoosenQuestions = async (data) => {
+        // finish after do the crate form function
+        console.log(data);
+    };
+
     const value = { 
         isLoading,
         searchInput,
@@ -157,7 +169,10 @@ const GlobalState = (props) => {
         getProjects,
         projects,
         addLeaguerInProject,
-        createNewProject
+        createNewProject,
+        getQuestions,
+        questions,
+        sendChoosenQuestions
     };
     
     return (
