@@ -24,8 +24,8 @@ export const Main = styled.main`
 
 export const ConteinerCard = styled.div`
   display:flex;
-  background-color:red; 
-    
+  
+      
 `
 
 export const Card = styled.div`
@@ -40,17 +40,29 @@ export const Card = styled.div`
 `
 
 export const ImgCard = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 100px;
+  display:flex;
+  width: 70px;
+  height: 70px;
+  margin-top:20px;
+  border-radius: 50%;
+  border:solid gray 2px;
+  
   
 `
-
 export const CardInfo = styled.div`
   display: flex;
   width:250px;
+  height:90px;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: stretch;
-  padding: 10px 10px 10px 20px;
+  /* border-radius:5px;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+  box-shadow: 5px 5px 15px 5px #000000; */
+  h4{
+    
+    color:#4066EB;
+    font-weight:bold;
+  }
+  
+  
 `

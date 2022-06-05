@@ -27,7 +27,7 @@ export const ConteinerCard = styled.div`
   grid-template-columns: repeat(3, minmax(100px, 2fr));
   column-gap: 2rem ;
   row-gap: 4rem ;
-  background-color:red;
+  
 `
 
 export const Card = styled.div`
