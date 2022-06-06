@@ -1,16 +1,16 @@
 import GlobalState from "../Global/GlobalState";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "../Pages/LoginPage/LoginPage";
-import SignUpPage from "../Pages/SignUpPage/SignUpPage";
-import LeaguersListPage from "../Pages/LeaguersListPage/LeaguersListPage";
-import LeaguersSignUpPage from "../Pages/LeaguersSignupPage/LeaguersSignupPage";
-import CollaboratorsListPage from "../Pages/CollaboratorsListPage/CollaboratorsListPage";
-import MenuPage from "../Pages/MenuPage/MenuPage";
-import EvaluationProcess from "../Pages/EvaluationProcess/EvaluationProcess";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import HomePage from "../Pages/HomePage/HomePage"
-import LeaguerProfilePage from "../Pages/LeaguerProfilePage/LeaguerProfilePage";
-import ProjectPage from "../Pages/ProjectPage/ProjectPage";
+import LoginPage from "../Pages/LoginPage/LoginPage.js";
+import SignUpPage from "../Pages/SignUpPage/SignUpPage.js";
+import LeaguersListPage from "../Pages/LeaguersListPage/LeaguersListPage.js";
+import LeaguersSignUpPage from "../Pages/LeaguersSignupPage/LeaguersSignupPage.js";
+import CollaboratorsListPage from "../Pages/CollaboratorsListPage/CollaboratorsListPage.js";
+import MenuPage from "../Pages/MenuPage/MenuPage.js";
+import EvaluationProcess from "../Pages/EvaluationProcess/EvaluationProcess.js";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage.js";
+import HomePage from "../Pages/HomePage/HomePage.js"
+import LeaguerProfilePage from "../Pages/LeaguerProfilePage/LeaguerProfilePage.js";
+import ProjectPage from "../Pages/ProjectPage/ProjectPage.js";
 
 
 const Router = () => {
