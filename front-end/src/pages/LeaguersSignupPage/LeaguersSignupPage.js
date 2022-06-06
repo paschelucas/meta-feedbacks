@@ -17,10 +17,10 @@ const LeaguersSignUpPage = () => {
     getUsers();
   }, []);
 
-  const responsibles = users.map((user) => {
+  const responsibles = users?.map((user) => {
     return (
       <option key={user.user_id} value={user.user_name}>{user.user_name}</option>
-    )
+    );
   });
 
   return (
