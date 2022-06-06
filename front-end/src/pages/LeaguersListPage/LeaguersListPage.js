@@ -3,7 +3,7 @@ import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
 import { goBack } from "../../routes/coordinator";
-import LeaguerCard from "../../components/LeaguerCard/LeaguerCard";
+import LeaguerCard from "../../Components/LeaguerCard/LeaguerCard";
 import { Main,Header,H1,Button,} from './styled'
 
 const LeaguersListPage = () => {
