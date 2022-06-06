@@ -83,7 +83,6 @@ const GlobalState = (props) => {
 
         setMessage(res.message);
 
-        
         close();
     };
 

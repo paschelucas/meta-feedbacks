@@ -1,70 +1,53 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🎯 Meta League - Feedbacks / FRONT-END
 
-## Available Scripts
+Aplicação que realiza interação com a API criada pelo BACK-END, e pretende disponibilizar para as pessoas usuárias uma experiência mais dinâmmica e segura de controle de tabelas de Feedbacks, Leaguers, Colaboradores e Projetos
 
-In the project directory, you can run:
+## 🚀 Autores
 
-### `npm start`
+- [@Britobtx](https://github.com/Britobtx)
+- [@christenLeo](https://github.com/christenLeo)
+- [@thiagohenrique23](https://github.com/thiagohenrique23)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👯 com (muita) ajuda de
+- [@DeborahLuna](https://github.com/DeborahLuna)
+- [@llpasche](https://github.com/llpasche)
+- Equipe da Meta e da Labenu no discord 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## 📄 Referências
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - [Trello Front-End](https://trello.com/invite/b/NIeMW7ee/866beac27db0336c6718fa33c60c1c06/front-end)
+ - [Design disponibilizado pela Meta](https://www.figma.com/file/WlEcsnxlpxYxFVPzzqxOlM/Materiais---Labenu?node-id=5%3A799)
+ - [Design mobile que tentamos fazer](https://www.figma.com/file/enFNdeFgs8kBQSalt9O1VI/Meta-League---Feedbacks?node-id=0%3A1)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚏 Funcionalidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Login
+- Controle de acesso baseado em autorizacões: Gestor, Mentor, Administrador
+- Visualização de listas de Colaboradores, Leaguers, Projetos e Perguntas
+- Pessoas gestoras apenas podem ver a lista de projetos e o Leaguers pelos quais é responsável
+- Pessoas mentoras não podem ver lista de Colaboradores e funcionalidades relacionadas
+- Registro de nova pessoa usuária, para Administradores apenas
+- Registro de novo Leaguer para Administradores e Mentores
+- Criacão de novo projeto, para Administradores apenas
+- Aplicação de Leaguers a projetos
+- Abertura de processo avaliativo - no momento apenas mostra a lista de Perguntas
+- Filtros de listas por nome
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Stack utilzada
 
-### `npm run eject`
+- React.js
+- HTML 5
+- CSS 3
+- Javascript
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Bibliotecas
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Material Ui Design
+- Styled-components
+- Axios
+- React-router
+- React-hook-form
+- Reactjs-popup
