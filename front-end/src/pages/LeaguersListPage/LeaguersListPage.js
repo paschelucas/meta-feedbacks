@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import GlobalContext from "../../Global/GlobalContext";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import { useNavigate } from "react-router-dom";
-import { goBack, goToLeaguersSignup } from "../../routes/coordinator";
+import { goBack } from "../../routes/coordinator";
 import LeaguerCard from "../../components/LeaguerCard/LeaguerCard";
 import { Main,Header,H1,Button,} from './styled'
 
@@ -24,7 +24,7 @@ const LeaguersListPage = () => {
                 if (leaguer.leaguer_responsavel === userName) {
                     return leaguer;
                 }
-                else{
+                else {
                     return '';
                 }
             }
