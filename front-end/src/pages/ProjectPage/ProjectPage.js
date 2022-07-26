@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../Global/GlobalContext";
 import { goBack } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import ProjectCard from "../../components/ProjectCard.js/ProjectCard";
+import ProjectCard from "../../Components/ProjectCard.js/ProjectCard";
 import Popup from "reactjs-popup";
 import { useForm } from "react-hook-form";
 
