@@ -1,4 +1,3 @@
-
 # 🎯 Meta League - Feedbacks
 
 Uma plataforma para automatizar e tornar mais fluida a avaliação de indicadores quentes e frios, além disso também servir de controle de histórico de projetos e feedbacks de cada leaguer juntamente com organização de colaboradores.
@@ -19,8 +18,3 @@ Uma plataforma para automatizar e tornar mais fluida a avaliação de indicadore
 
  - [Apresentação da proposta](https://drive.google.com/file/d/1J5MMrk2_LAQMbhEvQ-rl9mzdZNYM0I1Q/view?usp=sharing)
  
-
-
-## 💻 Demonstração
-
-- [meta-league-feedbacks](https://meta-league-feedbacks.surge.sh/)
